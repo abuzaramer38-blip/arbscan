@@ -37,10 +37,12 @@
       <label>Exchange <select id="triEx"><option value="all">Sab</option></select></label>
       <label>Start coin <select id="triStart"><option>USDT</option><option>USDC</option><option>BTC</option><option>ETH</option></select></label>
       <label>Min profit % <input id="triMin" type="number" step="0.01" value="-0.10"></label>
-      <label>Min size (USDT) <input id="triSize" type="number" step="10" value="0"></label>
+      <label>Min size (USDT) <input id="triSize" type="number" step="10" value="50"></label>
+      <label class="chk"><input type="checkbox" id="triHideUnk" checked> Size "?" wale chhupao</label>
+      <label class="chk"><input type="checkbox" id="triHideSus" checked> 5%+ wale chhupao</label>
       <span class="muted" id="triInfo"></span>
     </div>
-    <p class="note">Ek hi exchange par 3 trades ka chakkar. <b>Profit</b> = teeno trades ki taker fee ke baad. <b>Max size</b> = order book ke pehle level par kitna maal mojood hai.</p>
+    <p class="note">Ek hi exchange par 3 trades ka chakkar. <b>Profit</b> = teeno trades ki taker fee ke baad. <b>Max size</b> = order book ke pehle level par kitna maal mojood hai. Bara % aksar mare hue market (koi maal nahi) ka hota hai, is liye wo by default chhupe hain.</p>
     <div class="tablewrap"><table id="triTable"><thead><tr>
       <th class="l">Exchange</th><th class="l">Chakkar</th><th class="l">Trades</th><th>Profit (fee ke baad)</th><th>Max size</th>
     </tr></thead><tbody></tbody></table></div>
@@ -51,6 +53,7 @@
     <div class="filters">
       <label>Min profit % <input id="crMin" type="number" step="0.05" value="0"></label>
       <label>Min size (USDT) <input id="crSize" type="number" step="10" value="50"></label>
+      <label class="chk"><input type="checkbox" id="crHideUnk" checked> Size "?" wale chhupao</label>
       <label class="chk"><input type="checkbox" id="crHideSus" checked> 10%+ wale chhupao</label>
       <span class="muted" id="crInfo"></span>
     </div>

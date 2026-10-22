@@ -77,7 +77,10 @@ function renderTri() {
     if (!mk) continue;
     for (const r of triangular(mk, fees.spot[ex] ?? 0.1, [start], minPct, 150)) rows.push({ ex, ...r });
   }
-  rows = rows.filter((r) => (r.maxStart == null ? minSize <= 0 : r.maxStart >= minSize * (start === "USDT" || start === "USDC" ? 1 : 0)))
+  const hideUnk = $("#triHideUnk").checked;
+  const hideSus = $("#triHideSus").checked;
+  const stable = start === "USDT" || start === "USDC";
+  rows = rows.filter((r) => (r.maxStart == null ? !hideUnk : r.maxStart >= (stable ? minSize : 0)) && (!hideSus || !r.suspicious))
     .sort((a, b) => b.pct - a.pct).slice(0, 200);
   $("#triInfo").textContent = `${rows.length} chakkar · ${rows.filter((r) => r.pct > 0).length} munafe mein`;
   $("#triTable tbody").innerHTML = rows.length ? rows.map((r) => `<tr>
@@ -91,8 +94,9 @@ function renderCross() {
   const minPct = parseFloat($("#crMin").value) || 0;
   const minSize = parseFloat($("#crSize").value) || 0;
   const hide = $("#crHideSus").checked;
+  const hideUnk = $("#crHideUnk").checked;
   let rows = crossExchange(state.spot, fees.spot, "USDT", minPct, 600)
-    .filter((r) => (r.maxUsd == null || r.maxUsd >= minSize) && (!hide || r.pct < 10)).slice(0, 250);
+    .filter((r) => (r.maxUsd == null ? !hideUnk : r.maxUsd >= minSize) && (!hide || r.pct < 10)).slice(0, 250);
   $("#crInfo").textContent = `${rows.length} mauqe`;
   $("#crTable tbody").innerHTML = rows.length ? rows.map((r) => `<tr>
     <td class="l"><b>${r.base}</b></td><td>${nm(r.buyEx)} @ ${fmtPx(r.buy)}</td>
@@ -140,8 +144,8 @@ document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () 
   document.querySelectorAll(".panel").forEach((p) => p.classList.toggle("active", p.id === `tab-${b.dataset.tab}`));
   store.set("arbscan-tab", b.dataset.tab);
 }));
-["#triEx", "#triStart", "#triMin", "#triSize"].forEach((s) => $(s).addEventListener("input", renderTri));
-["#crMin", "#crSize", "#crHideSus"].forEach((s) => $(s).addEventListener("input", renderCross));
+["#triEx", "#triStart", "#triMin", "#triSize", "#triHideUnk", "#triHideSus"].forEach((s) => $(s).addEventListener("input", renderTri));
+["#crMin", "#crSize", "#crHideSus", "#crHideUnk"].forEach((s) => $(s).addEventListener("input", renderCross));
 ["#fdDays", "#fdSpotOnly"].forEach((s) => $(s).addEventListener("input", renderFunding));
 $("#feeTable").addEventListener("change", (e) => {
   const t = e.target;

@@ -11,11 +11,13 @@
 <header class="top">
   <div class="brand"><span class="logo">◈</span> ArbScan <span class="tag">read-only scanner</span></div>
   <div class="controls">
-    <label class="chk"><input type="checkbox" id="auto" checked> Auto refresh</label>
+    <label class="inv">Investment $ <input id="inv" type="number" step="10" min="1" value="100"></label>
+    <label class="inv">Min 24h volume $ <input id="minVol" type="number" step="50000" min="0" value="250000"></label>
+    <label class="chk"><input type="checkbox" id="auto" checked> Auto</label>
     <select id="every" aria-label="refresh interval">
       <option value="5">5 s</option><option value="10" selected>10 s</option><option value="30">30 s</option><option value="60">60 s</option>
     </select>
-    <button id="refresh" class="btn">Refresh now</button>
+    <button id="refresh" class="btn">Refresh</button>
     <span id="updated" class="muted">—</span>
   </div>
 </header>
@@ -24,27 +26,26 @@
 
 <nav class="tabs" role="tablist">
   <button class="tab active" data-tab="tri">Triangular</button>
-  <button class="tab" data-tab="cross">Exchange ↔ Exchange</button>
+  <button class="tab" data-tab="cross">Cross-exchange</button>
   <button class="tab" data-tab="fund">Funding rate</button>
   <button class="tab" data-tab="fees">Fees</button>
-  <button class="tab" data-tab="help">Kaise parhein</button>
+  <button class="tab" data-tab="help">Guide</button>
 </nav>
 
 <main>
   <!-- TRIANGULAR -->
   <section class="panel active" id="tab-tri">
     <div class="filters">
-      <label>Exchange <select id="triEx"><option value="all">Sab</option></select></label>
-      <label>Start coin <select id="triStart"><option>USDT</option><option>USDC</option><option>BTC</option><option>ETH</option></select></label>
-      <label>Min profit % <input id="triMin" type="number" step="0.01" value="-0.10"></label>
-      <label>Min size (USDT) <input id="triSize" type="number" step="10" value="50"></label>
-      <label class="chk"><input type="checkbox" id="triHideUnk" checked> Size "?" wale chhupao</label>
-      <label class="chk"><input type="checkbox" id="triHideSus" checked> 5%+ wale chhupao</label>
+      <label>Exchange <select id="triEx"><option value="all">All</option></select></label>
+      <label>Start <select id="triStart"><option>USDT</option><option>USDC</option></select></label>
+      <label>Min profit % <input id="triMin" type="number" step="0.01" value="-0.05"></label>
+      <label class="chk"><input type="checkbox" id="triFit"> Only if my investment fits</label>
+      <label class="chk"><input type="checkbox" id="triClean" checked> Hide suspicious (&gt;5% or size &lt; $10)</label>
       <span class="muted" id="triInfo"></span>
     </div>
-    <p class="note">Ek hi exchange par 3 trades ka chakkar. <b>Profit</b> = teeno trades ki taker fee ke baad. <b>Max size</b> = order book ke pehle level par kitna maal mojood hai. Bara % aksar mare hue market (koi maal nahi) ka hota hai, is liye wo by default chhupe hain.</p>
+    <p class="note">Three trades on one exchange, ending in the coin you started with. Profit is after all three taker fees. <b>Max size</b> = how much the best price can absorb; above that you get worse prices.</p>
     <div class="tablewrap"><table id="triTable"><thead><tr>
-      <th class="l">Exchange</th><th class="l">Chakkar</th><th class="l">Trades</th><th>Profit (fee ke baad)</th><th>Max size</th>
+      <th class="l">Exchange</th><th class="l">Route</th><th class="l">Trades</th><th>Profit %</th><th class="invh">Profit on $100</th><th class="invh2">You get back</th><th>Max size</th><th>Lowest 24h vol</th>
     </tr></thead><tbody></tbody></table></div>
   </section>
 
@@ -52,64 +53,63 @@
   <section class="panel" id="tab-cross">
     <div class="filters">
       <label>Min profit % <input id="crMin" type="number" step="0.05" value="0"></label>
-      <label>Min size (USDT) <input id="crSize" type="number" step="10" value="50"></label>
-      <label class="chk"><input type="checkbox" id="crHideUnk" checked> Size "?" wale chhupao</label>
-      <label class="chk"><input type="checkbox" id="crHideSus" checked> 10%+ wale chhupao</label>
+      <label class="chk"><input type="checkbox" id="crFit"> Only if my investment fits</label>
+      <label class="chk"><input type="checkbox" id="crClean" checked> Hide suspicious (&gt;10% or size &lt; $10)</label>
       <span class="muted" id="crInfo"></span>
     </div>
-    <p class="note">Ek exchange par sasta khareedo, doosre par mehnga becho. Dono taraf ki taker fee kati hui hai. <b>Withdrawal fee aur network shamil nahi.</b> Bara farq aksar is wajah se hota hai ke deposit/withdraw band hai ya same naam ka alag coin hai — trade se pehle dono exchange par check karo.</p>
+    <p class="note">Buy where it is cheapest, sell where it is most expensive. Taker fees on both sides are included; <b>withdrawal fees and transfer time are not</b>. Large gaps usually mean deposits/withdrawals are closed or the same ticker is a different token — check both exchanges first.</p>
     <div class="tablewrap"><table id="crTable"><thead><tr>
-      <th class="l">Coin</th><th>Khareedo</th><th>Becho</th><th>Farq</th><th>Profit (fee ke baad)</th><th>Max size</th>
+      <th class="l">Coin</th><th>Buy on</th><th>Sell on</th><th>Gap</th><th>Profit %</th><th class="invh">Profit on $100</th><th>Max size</th><th>Lowest 24h vol</th>
     </tr></thead><tbody></tbody></table></div>
   </section>
 
   <!-- FUNDING -->
   <section class="panel" id="tab-fund">
     <div class="filters">
-      <label>Kitne din hold <input id="fdDays" type="number" step="1" value="7" min="1"></label>
-      <label class="chk"><input type="checkbox" id="fdSpotOnly" checked> Sirf jahan spot bhi ho</label>
+      <label>Hold days <input id="fdDays" type="number" step="1" value="7" min="1"></label>
+      <label class="chk"><input type="checkbox" id="fdSpotOnly" checked> Spot market must exist</label>
       <span class="muted" id="fdInfo"></span>
     </div>
-    <h3>1) Same exchange: spot khareedo + futures short (cash &amp; carry)</h3>
-    <p class="note">Price upar neeche ho, asar barabar. Kamaai = funding. Fees = dono legs ka open + close. <b>Funding badalti rehti hai</b> — ye "abhi" ka rate hai, guarantee nahi.</p>
+    <h3>1) Same exchange: buy spot + short perpetual (cash &amp; carry)</h3>
+    <p class="note">Price moves cancel out; you earn the funding. Fees = open + close on both legs. Funding changes every period and can flip negative — these are current rates, not guarantees. You also need margin for the short.</p>
     <div class="tablewrap"><table id="fdCarry"><thead><tr>
-      <th class="l">Coin</th><th>Exchange</th><th>Funding</th><th>Har</th><th>Saalana</th><th>Fees</th><th>Barabar hone mein</th><th>N din ka net</th>
+      <th class="l">Coin</th><th>Exchange</th><th>Funding</th><th>Every</th><th>APR</th><th>Fees</th><th>Break-even</th><th class="netd">Net after N days</th><th class="invh">Profit on $100</th>
     </tr></thead><tbody></tbody></table></div>
-    <h3>2) Do exchanges: jahan funding zyada wahan short, jahan kam wahan long</h3>
+    <h3>2) Two exchanges: short where funding is high, long where it is low</h3>
     <div class="tablewrap"><table id="fdSpread"><thead><tr>
-      <th class="l">Coin</th><th>Short</th><th>Long</th><th>Farq / 8h</th><th>Saalana</th><th>Fees</th><th>Barabar hone mein</th><th>N din ka net</th>
+      <th class="l">Coin</th><th>Short on</th><th>Long on</th><th>Gap / 8h</th><th>APR</th><th>Fees</th><th>Break-even</th><th class="netd">Net after N days</th><th class="invh">Profit on $100</th>
     </tr></thead><tbody></tbody></table></div>
   </section>
 
   <!-- FEES -->
   <section class="panel" id="tab-fees">
-    <p class="note">Ye default VIP0 taker fees hain. Apne account ki asal fee (token discount, VIP level) yahan daalo — saare hisaab isi se hote hain. Ye sirf aapke browser mein save hoti hain.</p>
+    <p class="note">Default VIP0 taker fees. Enter your real fees (token discounts, VIP level) — every calculation uses them. Saved in your browser only.</p>
     <div class="tablewrap"><table id="feeTable"><thead><tr>
-      <th class="l">Exchange</th><th>Spot taker %</th><th>Futures taker %</th><th>Spot markets</th><th>Futures</th>
+      <th class="l">Exchange</th><th>Spot taker %</th><th>Futures taker %</th><th>Spot markets</th><th>Liquid markets</th><th>Perpetuals</th>
     </tr></thead><tbody></tbody></table></div>
-    <button id="feeReset" class="btn ghost">Default fees wapas</button>
+    <button id="feeReset" class="btn ghost">Reset to defaults</button>
   </section>
 
-  <!-- HELP -->
+  <!-- GUIDE -->
   <section class="panel" id="tab-help">
     <div class="prose">
-      <h3>Ye tool kya karta hai</h3>
-      <p>8 exchanges (Binance, Bybit, OKX, Bitget, MEXC, Gate, KuCoin, HTX) ka public data har kuch second mein uthata hai aur 3 tarah ke mauqe dhoondta hai. Koi API key nahi, koi trade nahi — sirf dekhta hai.</p>
-      <h3>Hara number = trade karo?</h3>
-      <p>Nahi. Pehle ye check karo:</p>
+      <h3>What is filtered out</h3>
       <ul>
-        <li><b>Size:</b> "Max size" sirf pehle level ka maal hai. Bara order price ko hila dega.</li>
-        <li><b>Speed:</b> Triangular mauqe milliseconds mein khatam hote hain; jab tak haath se 3 trades karoge, mauqa ja chuka hoga.</li>
-        <li><b>Deposit/withdraw:</b> Exchange ↔ exchange mein coin bhejna padta hai. Network, fee, aur waqt check karo. Jahan farq bohot bara ho, aksar withdraw band hota hai.</li>
-        <li><b>Same naam, alag coin:</b> Kai exchanges par ek hi ticker alag token ka hota hai.</li>
-        <li><b>Funding:</b> rate har 1–8 ghante badalta hai, ulta bhi ho sakta hai. Futures short par liquidation se bachne ke liye margin rakho.</li>
+        <li>Markets with less 24h volume than <b>Min 24h volume</b> (dead or thin coins).</li>
+        <li>Leveraged tokens (BTC3L, ETHUP, …).</li>
       </ul>
-      <h3>Mashwara</h3>
-      <p>Kuch din sirf dekho: kitne mauqe aate hain, kitni der rehte hain, kitna size hota hai. Phir faisla karo.</p>
+      <h3>Before you trade a green row</h3>
+      <ul>
+        <li><b>Size:</b> if Max size is below your investment, the real profit will be lower.</li>
+        <li><b>Speed:</b> triangular gaps on liquid markets last milliseconds; manual trading is usually too slow.</li>
+        <li><b>Transfers:</b> cross-exchange needs deposits/withdrawals open on both sides; check network, fee and time.</li>
+        <li><b>Same ticker, different token:</b> confirm the contract address on both exchanges.</li>
+        <li><b>Funding:</b> rates change every 1–8 h and can turn negative; keep margin to avoid liquidation.</li>
+      </ul>
     </div>
   </section>
 </main>
-<footer class="muted">Data: exchanges ke public APIs · Koi financial advice nahi · Fees aur profit takhmeena hain</footer>
+<footer class="muted">Public exchange data · Not financial advice · Profits are estimates</footer>
 <script type="module" src="/app.js"></script>
 </body>
 </html>

@@ -11,10 +11,14 @@ No API keys, no trading — public market data only.
   - cross-exchange funding spread (short the high-funding perp, long the low one),
   - fees, break-even days and net result for a chosen holding period.
 - **Fees tab**: editable spot/futures taker fees per exchange (stored in your browser).
+- **Junk filter**: markets below a minimum 24h USD volume (default $250k, quote volume converted to USD on the
+  same exchange) and leveraged tokens (BTC3L, ETHUP, …) are removed; suspicious rows (>5% / size < $10) hidden by default.
+- **Investment calculator**: enter an amount (default $100) to see the dollar profit per route, what you get back,
+  and whether the best price can absorb the whole amount.
 
 ## Structure
 - `lib/exchanges.js` — exchange adapters (public REST endpoints), normalised to one format.
-- `api/spot.js?ex=binance` — top-of-book bid/ask for all active spot markets.
+- `api/spot.js?ex=binance` — top-of-book bid/ask (+ 24h quote volume) for all active spot markets.
 - `api/funding.js?ex=binance` — USDT perpetual funding rates.
 - `api/health.js` — which exchanges respond from the server region.
 - `arb.js` — arbitrage maths (shared by browser and tests). `npm test` runs `test/arb.test.mjs`.

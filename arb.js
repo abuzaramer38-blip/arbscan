@@ -1,8 +1,43 @@
 // Arbitrage math. Pure functions, used by the browser (app.js) and by tests (node).
-// market row: [base, quote, bid, ask, bidQty, askQty]
+// market row: [base, quote, bid, ask, bidQty, askQty, quoteVolume24h]
 // fee values are in PERCENT (0.1 = 0.1%).
 
 const SUSPICIOUS_PCT = 5;
+const STABLES = new Set(["USDT", "USDC", "USD", "FDUSD", "TUSD", "USD1", "RLUSD", "DAI", "USDE", "PYUSD", "BUSD"]);
+const LEVERAGED = /^(.+?)(\d+[LS]|UP|DOWN|BULL|BEAR)$/;
+
+/** Price of each quote currency in USD, from the same exchange's markets. */
+export function quoteUsdMap(markets) {
+  const mid = new Map();
+  for (const [b, q, bid, ask] of markets) mid.set(`${b}/${q}`, (bid + ask) / 2);
+  const quotes = new Set(markets.map((m) => m[1]));
+  const out = { USDT: 1 };
+  for (const q of quotes) {
+    if (q === "USDT") continue;
+    if (mid.has(`${q}/USDT`)) out[q] = mid.get(`${q}/USDT`);
+    else if (mid.has(`USDT/${q}`)) out[q] = 1 / mid.get(`USDT/${q}`);
+    else if (mid.has(`${q}/USDC`)) out[q] = mid.get(`${q}/USDC`);
+    else if (STABLES.has(q)) out[q] = 1;
+  }
+  return out;
+}
+
+/** Remove junk: leveraged tokens and markets with 24h volume below minVolUsd. Adds usd volume as index 7. */
+export function cleanMarkets(markets, minVolUsd = 0, dropLeveraged = true) {
+  const qUsd = quoteUsdMap(markets);
+  const bases = new Set(markets.map((m) => m[0]));
+  const out = [];
+  for (const m of markets) {
+    if (dropLeveraged) {
+      const lv = m[0].match(LEVERAGED);
+      if (lv && bases.has(lv[1])) continue;
+    }
+    const usdVol = (m[6] || 0) * (qUsd[m[1]] || 0);
+    if (minVolUsd > 0 && !(usdVol >= minVolUsd)) continue;
+    out.push([m[0], m[1], m[2], m[3], m[4], m[5], m[6] || 0, usdVol]);
+  }
+  return out;
+}
 
 /** Triangular arbitrage on ONE exchange: start -> A -> B -> start. */
 export function triangular(markets, feePct, starts = ["USDT"], minPct = -0.5, limit = 200) {
@@ -13,11 +48,11 @@ export function triangular(markets, feePct, starts = ["USDT"], minPct = -0.5, li
     if (!g.has(from)) g.set(from, []);
     g.get(from).push(e);
   };
-  for (const [b, q, bid, ask, bq, aq] of markets) {
+  for (const [b, q, bid, ask, bq, aq, , vol] of markets) {
     // buy base with quote at ask
-    add(q, { to: b, rate: (1 / ask) * f, cap: aq > 0 ? aq * ask : null, sym: `${b}/${q}`, side: "BUY", px: ask });
+    add(q, { to: b, rate: (1 / ask) * f, cap: aq > 0 ? aq * ask : null, sym: `${b}/${q}`, side: "BUY", px: ask, vol });
     // sell base for quote at bid
-    add(b, { to: q, rate: bid * f, cap: bq > 0 ? bq : null, sym: `${b}/${q}`, side: "SELL", px: bid });
+    add(b, { to: q, rate: bid * f, cap: bq > 0 ? bq : null, sym: `${b}/${q}`, side: "SELL", px: bid, vol });
   }
   const out = [];
   for (const S of starts) {
@@ -40,6 +75,7 @@ export function triangular(markets, feePct, starts = ["USDT"], minPct = -0.5, li
             path: `${S} → ${A} → ${B} → ${S}`,
             legs: [e1, e2, e3].map((e) => `${e.side} ${e.sym} @ ${fmtPx(e.px)}`),
             pct, maxStart, start: S,
+            minVol: Math.min(e1.vol ?? Infinity, e2.vol ?? Infinity, e3.vol ?? Infinity),
             suspicious: pct > SUSPICIOUS_PCT,
           });
         }
@@ -54,10 +90,10 @@ export function triangular(markets, feePct, starts = ["USDT"], minPct = -0.5, li
 export function crossExchange(spotByEx, fees, quote = "USDT", minPct = -0.2, limit = 300) {
   const book = new Map(); // base -> [{ex, bid, ask, bq, aq}]
   for (const [ex, mk] of Object.entries(spotByEx)) {
-    for (const [b, q, bid, ask, bq, aq] of mk) {
+    for (const [b, q, bid, ask, bq, aq, , vol] of mk) {
       if (q !== quote) continue;
       if (!book.has(b)) book.set(b, []);
-      book.get(b).push({ ex, bid, ask, bq, aq });
+      book.get(b).push({ ex, bid, ask, bq, aq, vol });
     }
   }
   const out = [];
@@ -75,6 +111,7 @@ export function crossExchange(spotByEx, fees, quote = "USDT", minPct = -0.2, lim
           base, buyEx: buy.ex, sellEx: sell.ex, buy: buy.ask, sell: sell.bid,
           gross: (sell.bid / buy.ask - 1) * 100, pct,
           maxUsd: Number.isFinite(qty) ? qty * buy.ask : null,
+          minVol: Math.min(buy.vol ?? Infinity, sell.vol ?? Infinity),
           suspicious: pct > SUSPICIOUS_PCT * 2,
         });
       }

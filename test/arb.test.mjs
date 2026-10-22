@@ -45,4 +45,22 @@ const s = fr.spread[0];
 assert.equal(s.shortEx, "x");
 assert.equal(s.longEx, "y");
 assert.ok(Math.abs(s.diff8Pct - 0.03) < 1e-9 && Math.abs(s.apr - 0.03 * 3 * 365) < 1e-9);
+// 4) junk filter: leveraged tokens + low volume removed; quote converted to USD
+import { cleanMarkets, quoteUsdMap } from "../arb.js";
+const raw = [
+  ["BTC", "USDT", 60000, 60000, 1, 1, 5e8],
+  ["BTC3L", "USDT", 1, 1.01, 1, 1, 9e6],        // leveraged -> dropped
+  ["JUP", "USDT", 0.5, 0.501, 1, 1, 2e6],        // NOT leveraged (no base "J")
+  ["ETH", "BTC", 0.05, 0.05, 1, 1, 10],          // 10 BTC volume = $600k
+  ["DEAD", "BTC", 0.0000001, 0.0000002, 1, 1, 0.01], // $600 -> dropped
+  ["ASTER", "THB", 23.9, 24, 1, 1, 1e6],         // 1M THB = ~$29.7k -> dropped at $100k
+  ["SOL", "THB", 5000, 5010, 1, 1, 1e8],          // 100M THB = ~$2.97M -> kept
+  ["USDT", "THB", 33.6, 33.7, 1, 1, 1e8],
+];
+const qu = quoteUsdMap(raw);
+assert.ok(Math.abs(qu.BTC - 60000) < 1e-9 && Math.abs(qu.THB - 1 / 33.65) < 1e-12);
+const cl = cleanMarkets(raw, 100000).map((m) => m[0] + "/" + m[1]);
+assert.deepEqual(cl.sort(), ["BTC/USDT", "ETH/BTC", "JUP/USDT", "SOL/THB", "USDT/THB"].sort(), cl.join(","));
+const solThb = cleanMarkets(raw, 0).find((m) => m[0] === "SOL" && m[1] === "THB");
+assert.ok(Math.abs(solThb[7] - 1e8 / 33.65) < 1, "usd volume");
 console.log("all arbitrage math tests passed");

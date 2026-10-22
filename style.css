@@ -1,0 +1,54 @@
+:root {
+  --bg: #0e1116; --panel: #151a21; --panel2: #1b222b; --line: #27303b; --ink: #e6e9ee; --mute: #8b95a5;
+  --pos: #34d399; --neg: #f87171; --warn: #fbbf24; --acc: #60a5fa;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) { --bg: #f6f7f9; --panel: #fff; --panel2: #f1f3f6; --line: #e2e6ea; --ink: #14181f; --mute: #5d6675;
+    --pos: #0f8a5f; --neg: #c0362c; --warn: #a16207; --acc: #1d5fd1; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+.top { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--line); background: var(--panel); position: sticky; top: 0; z-index: 5; }
+.brand { font-weight: 700; font-size: 18px; letter-spacing: .2px; }
+.logo { color: var(--acc); }
+.tag { font-size: 11px; font-weight: 500; color: var(--mute); border: 1px solid var(--line); border-radius: 99px; padding: 2px 8px; margin-left: 6px; vertical-align: middle; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn { background: var(--acc); color: #fff; border: 0; border-radius: 8px; padding: 7px 12px; font-weight: 600; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--acc); border: 1px solid var(--line); margin-top: 10px; }
+select, input[type=number] { background: var(--panel2); color: var(--ink); border: 1px solid var(--line); border-radius: 7px; padding: 6px 8px; font: inherit; }
+input[type=number] { width: 96px; }
+.chk { display: inline-flex; gap: 6px; align-items: center; }
+.muted { color: var(--mute); font-size: 12.5px; }
+.status { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 16px; }
+.chip { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px; font-size: 12.5px; flex: 1 1 150px; max-width: 240px; min-width: 0; }
+@media (max-width: 600px) { .chip { flex-basis: calc(50% - 4px); max-width: none; font-size: 11.5px; } .status { gap: 6px; } }
+.chip b { display: block; font-size: 13px; text-transform: capitalize; }
+.chip.ok b::before { content: "● "; color: var(--pos); }
+.chip.err b::before { content: "● "; color: var(--neg); }
+.chip.wait b::before { content: "● "; color: var(--warn); }
+.chip .e { color: var(--neg); display: block; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tabs { display: flex; gap: 4px; padding: 0 16px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+.tab { background: none; border: 0; color: var(--mute); padding: 10px 12px; font: inherit; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
+.tab.active { color: var(--ink); border-bottom-color: var(--acc); }
+main { padding: 14px 16px 40px; max-width: 1280px; margin: 0 auto; }
+.panel { display: none; }
+.panel.active { display: block; }
+.filters { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 8px; }
+.filters label { display: inline-flex; gap: 6px; align-items: center; color: var(--mute); }
+.note { color: var(--mute); margin: 6px 0 12px; max-width: 900px; }
+h3 { font-size: 15px; margin: 20px 0 4px; }
+.tablewrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+th { position: sticky; top: 0; background: var(--panel2); color: var(--mute); font-weight: 600; font-size: 12.5px; }
+td.l, th.l { text-align: left; }
+td.legs { text-align: left; font-size: 12px; color: var(--mute); white-space: normal; min-width: 260px; }
+tr:hover td { background: var(--panel2); }
+.pos { color: var(--pos); font-weight: 700; }
+.neg { color: var(--neg); }
+.sus { color: var(--warn); font-size: 11px; margin-left: 6px; border: 1px solid var(--warn); border-radius: 6px; padding: 0 5px; }
+.ex { text-transform: capitalize; }
+.empty { padding: 18px; text-align: center; color: var(--mute); }
+.prose { max-width: 820px; } .prose li { margin: 4px 0; }
+footer { text-align: center; padding: 20px 16px 30px; }
+td input[type=number] { width: 80px; }

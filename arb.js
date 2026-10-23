@@ -170,11 +170,25 @@ export function funding(futByEx, spotByEx, spotFees, futFees, holdDays = 7) {
 // Everything below answers one question: "how many dollars do I actually keep?"
 // Rules: never project a spike forward, count every cost we know, and return null when we cannot know.
 
-/** Average funding per DAY (%) from history rows [{t, rate}] of one contract. null if too little data. */
+/** Real payment interval (hours) from history timestamps: median gap, rounded. null if unknown. */
+export function histInterval(hist) {
+  if (!hist || hist.length < 3) return null;
+  const t = hist.map((h) => h.t).filter(Number.isFinite).sort((a, b) => b - a);
+  const gaps = [];
+  for (let i = 0; i + 1 < t.length; i++) gaps.push((t[i] - t[i + 1]) / 3600000);
+  if (!gaps.length) return null;
+  gaps.sort((a, b) => a - b);
+  const g = gaps[Math.floor(gaps.length / 2)];
+  return g > 0 ? Math.max(1, Math.round(g)) : null;
+}
+
+/** Average funding per DAY (%) from history rows [{t, rate}]. Uses the interval seen in the history itself,
+ *  so an exchange that silently pays every 1h instead of 8h cannot fool us. null if too little data. */
 export function avgDailyPct(hist, ivh, minPoints = 3) {
   if (!hist || hist.length < minPoints) return null;
+  const iv = histInterval(hist) || ivh || 8;
   const mean = hist.reduce((s, h) => s + h.rate, 0) / hist.length;
-  return mean * (24 / (ivh || 8)) * 100;
+  return mean * (24 / iv) * 100;
 }
 
 /**

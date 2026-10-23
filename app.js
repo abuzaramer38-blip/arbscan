@@ -1,4 +1,4 @@
-import { triangular, crossExchange, funding, cleanMarkets, fmtPx, avgDailyPct, honestCarry, honestSpread, honestOneOff } from "/arb.js";
+import { triangular, crossExchange, funding, cleanMarkets, fmtPx, avgDailyPct, histInterval, honestCarry, honestSpread, honestOneOff } from "/arb.js";
 
 const EX = ["binance", "bybit", "okx", "bitget", "mexc", "gate", "kucoin", "htx"];
 const NAME = { binance: "Binance", bybit: "Bybit", okx: "OKX", bitget: "Bitget", mexc: "MEXC", gate: "Gate", kucoin: "KuCoin", htx: "HTX" };
@@ -198,7 +198,8 @@ function histAvg(ex, sym, ivh) {
   if (!h || h.loading) return { loading: true };
   if (!h.ok) return { avg: null, why: "no history" };
   const avg = avgDailyPct(h.rows, ivh);
-  return avg == null ? { avg: null, why: "too new" } : { avg, n: h.rows.length };
+  const iv = histInterval(h.rows);
+  return avg == null ? { avg: null, why: "too new" } : { avg, n: h.rows.length, iv: iv || ivh };
 }
 function spotSpreadPct(ex, base) {
   const m = (state.raw[ex] || []).find((x) => x[0] === base && x[1] === "USDT");
@@ -219,8 +220,11 @@ function renderFunding() {
     needHist(r.ex, r.sym);
     const h = histAvg(r.ex, r.sym, r.ivh);
     const spr = spotSpreadPct(r.ex, r.base);
+    const iv = h.iv || r.ivh; // real interval seen in history beats the exchange's/assumed one
+    const nowDaily = r.rate * (24 / iv) * 100;
+    r = { ...r, ivh: iv, dailyPct: nowDaily };
     const hc = h.avg == null ? null : honestCarry({
-      dailyNowPct: r.dailyPct, avgDaily: h.avg, spotFee: fees.spot[r.ex] ?? 0.1, futFee: fees.fut[r.ex] ?? 0.05,
+      dailyNowPct: nowDaily, avgDaily: h.avg, spotFee: fees.spot[r.ex] ?? 0.1, futFee: fees.fut[r.ex] ?? 0.05,
       spreadPct: (spr + PERP_SPREAD) / 2, capital: I, days: d,
     });
     return { ...r, h, hc, spike: h.avg != null && r.dailyPct > 3 * Math.max(h.avg, 0.0001) };
@@ -228,16 +232,26 @@ function renderFunding() {
   const bc = c.find((r) => r.hc);
   bestBanner("#fdBest", bc && { usd: bc.hc.netUsd, label: `${bc.base} on ${nm(bc.ex)}, ${d} day${d > 1 ? "s" : ""}, $${(I / 2).toFixed(0)} spot + $${(I / 2).toFixed(0)} margin` }, I, "funding trade");
 
-  const sc = spread.sort((a, b) => b.dailyPct - a.dailyPct).slice(0, 20).map((r) => {
+  const sc = spread.sort((a, b) => b.dailyPct - a.dailyPct).slice(0, 20).map((r0) => {
+    let r = r0;
     needHist(r.shortEx, r.shortSym);
     needHist(r.longEx, r.longSym);
     const hs = histAvg(r.shortEx, r.shortSym, r.shortIv);
     const hl = histAvg(r.longEx, r.longSym, r.longIv);
     const loading = hs.loading || hl.loading;
+    // recompute today's gap with the REAL payment intervals from history
+    const sIv = hs.iv || r.shortIv, lIv = hl.iv || r.longIv;
+    const nowDiff = r.shortRate * (24 / sIv) - r.longRate * (24 / lIv);
+    const ivFixed = sIv !== r.shortIv || lIv !== r.longIv;
+    r = { ...r, shortIv: sIv, longIv: lIv, dailyPct: nowDiff, ivFixed };
+    // small coins: perp spread is at least the spot spread we can see
+    const pSpr = Math.max(PERP_SPREAD, spotSpreadPct(r.shortEx, r.base), spotSpreadPct(r.longEx, r.base));
+    const extreme = Math.abs(r.shortRate * (24 / sIv)) > 1 || Math.abs(r.longRate * (24 / lIv)) > 1;
+    r.extreme = extreme;
     const avgDiff = hs.avg != null && hl.avg != null ? hs.avg - hl.avg : null;
     const hc = avgDiff == null ? null : honestSpread({
       diffNowDaily: r.dailyPct, diffAvgDaily: avgDiff, futFeeA: fees.fut[r.shortEx] ?? 0.05, futFeeB: fees.fut[r.longEx] ?? 0.05,
-      spreadPct: PERP_SPREAD, capital: I, days: d,
+      spreadPct: pSpr, capital: I, days: d,
     });
     return { ...r, loading, avgDiff, hc };
   }).sort((a, b) => (b.hc?.netUsd ?? -1e9) - (a.hc?.netUsd ?? -1e9));
@@ -247,7 +261,7 @@ function renderFunding() {
     : h.avg == null ? `<span class="muted">${h.why} — not counted</span>` : `${(h.avg / (24 / ivh)).toFixed(4)}%`;
   $("#fdCarry tbody").innerHTML = c.length ? c.map((r) => `<tr>
     <td class="l"><b>${r.base}</b></td><td>${nm(r.ex)}${r.spot ? "" : ' <span class="sus">no liquid spot</span>'}</td>
-    <td>${r.ratePct.toFixed(4)}% / ${r.ivh}h${r.spike ? ' <span class="sus" title="Today is far above its 3-day average; it usually falls back">spike</span>' : ""}</td>
+    <td>${r.ratePct.toFixed(4)}% / ${r.ivh}h${r.dailyPct > 1 ? ' <span class="sus" title="Over 1% a day: the coin is being squeezed and can move 30-100%">high risk</span>' : ""}${r.spike ? ' <span class="sus" title="Today is far above its 3-day average; it usually falls back">spike</span>' : ""}</td>
     <td>${avgCell(r.h, r.ivh)}</td>
     <td>${r.hc ? `${(r.hc.usedDaily).toFixed(3)}%/day` : "—"}</td>
     <td>${r.hc ? `$${r.hc.costUsd.toFixed(2)}` : "—"}</td>
@@ -256,7 +270,7 @@ function renderFunding() {
     : empty(8, "Loading…");
   $("#fdSpread tbody").innerHTML = sc.length ? sc.map((r) => `<tr>
     <td class="l"><b>${r.base}</b></td><td>${nm(r.shortEx)} ${r.shortRate.toFixed(4)}%/${r.shortIv}h</td>
-    <td>${nm(r.longEx)} ${r.longRate.toFixed(4)}%/${r.longIv}h</td><td>${r.dailyPct.toFixed(3)}%/day</td>
+    <td>${nm(r.longEx)} ${r.longRate.toFixed(4)}%/${r.longIv}h</td><td>${r.dailyPct.toFixed(3)}%/day${r.extreme ? ' <span class="sus" title="Over 1% a day on one side: the coin is being squeezed. Price can jump 30-100% and liquidate one leg; rates change every hour.">high risk</span>' : ""}</td>
     <td>${r.loading ? '<span class="muted">checking…</span>' : r.avgDiff == null ? '<span class="muted">no history — not counted</span>' : `${r.avgDiff.toFixed(3)}%/day`}</td>
     <td>${r.hc ? `$${r.hc.costUsd.toFixed(2)}` : "—"}</td><td>${r.hc ? span(r.hc.breakevenDays) : "—"}</td>
     <td>${r.hc ? money(r.hc.netUsd) : '<span class="muted">—</span>'}</td></tr>`).join("")

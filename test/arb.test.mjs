@@ -78,3 +78,9 @@ const o = honestOneOff({ pct: 1, maxSize: 12, capital: 1000, fixedCostUsd: 1 });
 assert.ok(Math.abs(o.netUsd - (0.12 - 1)) < 1e-9 && o.partial);
 assert.equal(honestOneOff({ pct: 1, maxSize: null, capital: 100 }), null);
 console.log("honest profit tests passed");
+// 6) interval taken from history timestamps (exchange says 8h but really pays hourly)
+import { histInterval } from "../arb.js";
+const hourly = Array.from({ length: 10 }, (_, i) => ({ t: 1e12 - i * 3600000, rate: 0.001 }));
+assert.equal(histInterval(hourly), 1);
+assert.ok(Math.abs(avgDailyPct(hourly, 8) - 2.4) < 1e-9, "0.1%/h = 2.4%/day, not 0.3%");
+console.log("interval tests passed");

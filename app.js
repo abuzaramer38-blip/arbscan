@@ -16,11 +16,15 @@ let fees = store.get("arbscan-fees", structuredClone(DEFAULT_FEES));
 const state = { raw: {}, clean: {}, fut: {}, spotMeta: {}, futMeta: {}, lastFut: 0 };
 const $ = (s) => document.querySelector(s);
 const inv = () => Math.max(1, parseFloat($("#inv").value) || 100);
-// empty / invalid box falls back to $250k; never fully off (hard floor $10k) so dead markets stay hidden
+// empty / invalid box falls back to $50k; never fully off (hard floor $1k) so totally dead markets stay hidden
+const VOL_DEFAULT = 50000;
+const VOL_FLOOR = 1000;
+const THIN = 100000; // below this 24h volume a route gets a "thin" warning
 const minVol = () => {
   const v = parseFloat($("#minVol").value);
-  return Number.isFinite(v) ? Math.max(10000, v) : 250000;
+  return Number.isFinite(v) ? Math.max(VOL_FLOOR, v) : VOL_DEFAULT;
 };
+const volCell = (v) => `${usd(v)}${v < THIN ? ' <span class="sus" title="Low volume: your order can move the price">thin</span>' : ""}`;
 
 // ---------- data
 async function load(kind, ex) {
@@ -112,7 +116,7 @@ function renderTri() {
     return `<tr>
     <td class="l">${nm(r.ex)}</td><td class="l">${r.path}</td><td class="legs">${r.legs.join("<br>")}</td>
     <td>${pct(r.pct)}</td><td>${money(profit, profit !== 0 && Math.abs(profit) < 0.1 ? 3 : 2)}</td><td>${backCell(I, r.pct, r.maxStart)}</td>
-    <td>${sizeCell(r.maxStart)}</td><td>${usd(r.minVol)}</td></tr>`;
+    <td>${sizeCell(r.maxStart)}</td><td>${volCell(r.minVol)}</td></tr>`;
   }).join("") : empty(8, "No route matches these filters. Lower the min profit or the min 24h volume.");
 }
 
@@ -128,7 +132,7 @@ function renderCross() {
   $("#crTable tbody").innerHTML = rows.length ? rows.map((r) => `<tr>
     <td class="l"><b>${r.base}</b></td><td>${nm(r.buyEx)} @ ${fmtPx(r.buy)}</td><td>${nm(r.sellEx)} @ ${fmtPx(r.sell)}</td>
     <td>${r.gross.toFixed(3)}%</td><td>${pct(r.pct)}</td><td>${money((I * r.pct) / 100)}</td>
-    <td>${sizeCell(r.maxUsd)}</td><td>${usd(r.minVol)}</td></tr>`).join("")
+    <td>${sizeCell(r.maxUsd)}</td><td>${volCell(r.minVol)}</td></tr>`).join("")
     : empty(8, "No opportunity matches these filters.");
 }
 
@@ -183,7 +187,7 @@ document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () 
 $("#inv").addEventListener("input", () => { store.set("arbscan-inv", inv()); renderAll(); });
 $("#minVol").addEventListener("change", () => {
   $("#minVol").value = minVol();
-  store.set("arbscan-minvol", minVol());
+  store.set("arbscan-minvol-v2", minVol());
   rebuildClean();
   renderAll();
   renderFees();
@@ -220,7 +224,7 @@ $("#every").addEventListener("change", schedule);
 
 // ---------- init
 $("#inv").value = store.get("arbscan-inv", 100);
-$("#minVol").value = Math.max(10000, Number(store.get("arbscan-minvol", 250000)) || 250000);
+$("#minVol").value = Math.max(VOL_FLOOR, Number(store.get("arbscan-minvol-v2", VOL_DEFAULT)) || VOL_DEFAULT);
 $("#triEx").innerHTML += EX.map((e) => `<option value="${e}">${nm(e)}</option>`).join("");
 document.querySelector(`.tab[data-tab="${store.get("arbscan-tab", "tri")}"]`)?.click();
 setHeaders();

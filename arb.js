@@ -139,7 +139,7 @@ export function funding(futByEx, spotByEx, spotFees, futFees, holdDays = 7) {
       const fees = 2 * ((spotFees[r.ex] ?? 0.1) + (futFees[r.ex] ?? 0.05)); // open + close, both legs, %
       const dailyPct = r.rate * (24 / r.ivh) * 100;
       carry.push({
-        base, ex: r.ex, ratePct: r.rate * 100, ivh: r.ivh, apr: r.apr, dailyPct, feesPct: fees,
+        base, ex: r.ex, sym: r.sym, rate: r.rate, ratePct: r.rate * 100, ivh: r.ivh, apr: r.apr, dailyPct, feesPct: fees,
         breakevenDays: dailyPct > 0 ? fees / dailyPct : Infinity,
         netHoldPct: dailyPct * holdDays - fees, spot: hasSpot(r.ex, base), next: r.next,
       });
@@ -156,13 +156,66 @@ export function funding(futByEx, spotByEx, spotFees, futFees, holdDays = 7) {
     const fees = 2 * ((futFees[hi.ex] ?? 0.05) + (futFees[lo.ex] ?? 0.05));
     const dailyPct = diff8 * 3 * 100;
     spread.push({
-      base, shortEx: hi.ex, shortRate: hi.rate * 100, shortIv: hi.ivh, longEx: lo.ex, longRate: lo.rate * 100, longIv: lo.ivh,
+      base, shortEx: hi.ex, shortSym: hi.sym, shortRate: hi.rate * 100, shortIv: hi.ivh,
+      longEx: lo.ex, longSym: lo.sym, longRate: lo.rate * 100, longIv: lo.ivh, dailyPct,
       diff8Pct: diff8 * 100, apr: diff8 * 3 * 365 * 100, feesPct: fees,
       breakevenDays: dailyPct > 0 ? fees / dailyPct : Infinity, netHoldPct: dailyPct * holdDays - fees,
     });
   }
   spread.sort((a, b) => b.netHoldPct - a.netHoldPct);
   return { carry: carry.slice(0, 300), spread: spread.slice(0, 300) };
+}
+
+// ------------------------------------------------------------------ honest (conservative) profit
+// Everything below answers one question: "how many dollars do I actually keep?"
+// Rules: never project a spike forward, count every cost we know, and return null when we cannot know.
+
+/** Average funding per DAY (%) from history rows [{t, rate}] of one contract. null if too little data. */
+export function avgDailyPct(hist, ivh, minPoints = 3) {
+  if (!hist || hist.length < minPoints) return null;
+  const mean = hist.reduce((s, h) => s + h.rate, 0) / hist.length;
+  return mean * (24 / (ivh || 8)) * 100;
+}
+
+/**
+ * Cash & carry on one exchange with total capital C: C/2 buys spot, C/2 is margin for a 1x short perp.
+ * Funding is earned on the C/2 position only. Rate used = the LOWER of now and the 3-day average.
+ * costs: open+close taker fees on both legs + crossing the bid/ask spread on both legs.
+ */
+export function honestCarry({ dailyNowPct, avgDaily, spotFee, futFee, spreadPct, capital, days }) {
+  if (avgDaily == null) return null;
+  const usedDaily = Math.min(dailyNowPct, avgDaily);
+  const half = capital / 2;
+  const feeUsd = half * (2 * spotFee + 2 * futFee) / 100;
+  const spreadUsd = half * (2 * spreadPct) / 100; // spot spread + (assumed equal) perp spread
+  const costUsd = feeUsd + spreadUsd;
+  const perDayUsd = half * usedDaily / 100;
+  return {
+    usedDaily, perDayUsd, costUsd,
+    netUsd: perDayUsd * days - costUsd,
+    breakevenDays: perDayUsd > 0 ? costUsd / perDayUsd : Infinity,
+  };
+}
+
+/** Funding spread between two exchanges: C/2 margin each side, 1x. Diff used = lower of now and 3-day average. */
+export function honestSpread({ diffNowDaily, diffAvgDaily, futFeeA, futFeeB, spreadPct, capital, days }) {
+  if (diffAvgDaily == null) return null;
+  const usedDaily = Math.min(diffNowDaily, diffAvgDaily);
+  const half = capital / 2;
+  const costUsd = half * (2 * futFeeA + 2 * futFeeB) / 100 + half * (2 * spreadPct) / 100; // round trip crosses the spread once per leg
+  const perDayUsd = half * usedDaily / 100;
+  return {
+    usedDaily, perDayUsd, costUsd,
+    netUsd: perDayUsd * days - costUsd,
+    breakevenDays: perDayUsd > 0 ? costUsd / perDayUsd : Infinity,
+  };
+}
+
+/** One-off trade (triangular / cross): profit only on the size the best price can take, minus fixed costs ($). null when size unknown. */
+export function honestOneOff({ pct, maxSize, capital, fixedCostUsd = 0 }) {
+  if (maxSize == null) return null;
+  const used = Math.min(capital, maxSize);
+  return { used, netUsd: used * pct / 100 - fixedCostUsd, partial: maxSize < capital };
 }
 
 export function fmtPx(p) {

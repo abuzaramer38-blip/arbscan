@@ -64,3 +64,17 @@ assert.deepEqual(cl.sort(), ["BTC/USDT", "ETH/BTC", "JUP/USDT", "SOL/THB", "USDT
 const solThb = cleanMarkets(raw, 0).find((m) => m[0] === "SOL" && m[1] === "THB");
 assert.ok(Math.abs(solThb[7] - 1e8 / 33.65) < 1, "usd volume");
 console.log("all arbitrage math tests passed");
+
+// 5) honest profit
+import { honestCarry, honestOneOff, avgDailyPct } from "../arb.js";
+// IRYS-like spike: now 1.8188%/4h = 10.91%/day; 3-day avg 0.05%/4h = 0.3%/day
+const avg = avgDailyPct([{ rate: 0.0005 }, { rate: 0.0005 }, { rate: 0.0005 }], 4);
+assert.ok(Math.abs(avg - 0.3) < 1e-9);
+const hc = honestCarry({ dailyNowPct: 10.9128, avgDaily: avg, spotFee: 0.1, futFee: 0.06, spreadPct: 0.1, capital: 100, days: 7 });
+// $50 position * 0.3%/day * 7 = $1.05 ; costs = 50*(0.2+0.12)/100 + 50*0.2/100 = 0.16+0.10 = 0.26
+assert.ok(Math.abs(hc.netUsd - (1.05 - 0.26)) < 1e-9, `carry ${hc.netUsd}`);
+assert.equal(honestCarry({ dailyNowPct: 5, avgDaily: null, spotFee: 0.1, futFee: 0.1, spreadPct: 0, capital: 100, days: 7 }), null);
+const o = honestOneOff({ pct: 1, maxSize: 12, capital: 1000, fixedCostUsd: 1 });
+assert.ok(Math.abs(o.netUsd - (0.12 - 1)) < 1e-9 && o.partial);
+assert.equal(honestOneOff({ pct: 1, maxSize: null, capital: 100 }), null);
+console.log("honest profit tests passed");

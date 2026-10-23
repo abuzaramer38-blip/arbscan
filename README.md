@@ -6,6 +6,7 @@ No API keys, no trading — public market data only.
 ## What it finds
 - **Triangular** (same exchange): `USDT → A → B → USDT`, after 3 taker fees, with top-of-book size.
 - **Exchange ↔ exchange**: buy where the ask is lowest, sell where the bid is highest (taker fees on both sides; withdrawal fees not included).
+- **Honest numbers**: every "You keep" figure is after fees, spread and withdrawal fee, only on the size that fits; funding uses the lower of today's rate and the 3-day average (`api/history.js`).
 - **Funding rate**:
   - cash & carry on one exchange (long spot + short perpetual),
   - cross-exchange funding spread (short the high-funding perp, long the low one),

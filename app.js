@@ -73,6 +73,12 @@ function backCell(I, p, max) {
   return `$${(I * (1 + p / 100)).toFixed(2)}`;
 }
 
+// profit only on the amount the best price can actually take
+function profitFit(I, p, max) {
+  if (max != null && max < I) return `${money((max * p) / 100)} <span class="nofit">only $${max.toFixed(0)} fits</span>`;
+  return money((I * p) / 100);
+}
+
 function setHeaders() {
   document.querySelectorAll(".invh").forEach((th) => { th.textContent = `Profit on $${inv()}`; });
   const d = Math.max(1, parseFloat($("#fdDays").value) || 7);
@@ -131,7 +137,7 @@ function renderCross() {
   $("#crInfo").textContent = `${rows.length} opportunities`;
   $("#crTable tbody").innerHTML = rows.length ? rows.map((r) => `<tr>
     <td class="l"><b>${r.base}</b></td><td>${nm(r.buyEx)} @ ${fmtPx(r.buy)}</td><td>${nm(r.sellEx)} @ ${fmtPx(r.sell)}</td>
-    <td>${r.gross.toFixed(3)}%</td><td>${pct(r.pct)}</td><td>${money((I * r.pct) / 100)}</td>
+    <td>${r.gross.toFixed(3)}%</td><td>${pct(r.pct)}</td><td>${profitFit(I, r.pct, r.maxUsd)}</td>
     <td>${sizeCell(r.maxUsd)}</td><td>${volCell(r.minVol)}</td></tr>`).join("")
     : empty(8, "No opportunity matches these filters.");
 }

@@ -57,7 +57,7 @@
       <label class="chk"><input type="checkbox" id="crClean" checked> Hide suspicious (&gt;10% or size &lt; $10)</label>
       <span class="muted" id="crInfo"></span>
     </div>
-    <p class="note">Buy where it is cheapest, sell where it is most expensive. Taker fees on both sides are included; <b>withdrawal fees and transfer time are not</b>. Large gaps usually mean deposits/withdrawals are closed or the same ticker is a different token — check both exchanges first.</p>
+    <p class="note">Buy where it is cheapest, send the coin, sell where it is most expensive. One-time profit per trade; the transfer takes ~10 min to 2 h. Taker fees on both sides are included; <b>withdrawal fees and price moves during the transfer are not</b>. Large gaps usually mean deposits/withdrawals are closed or the same ticker is a different token — check both exchanges first.</p>
     <div class="tablewrap"><table id="crTable"><thead><tr>
       <th class="l">Coin</th><th>Buy on</th><th>Sell on</th><th>Gap</th><th>Profit %</th><th class="invh">Profit on $100</th><th>Max size</th><th>Lowest 24h vol</th>
     </tr></thead><tbody></tbody></table></div>
@@ -71,7 +71,7 @@
       <span class="muted" id="fdInfo"></span>
     </div>
     <h3>1) Same exchange: buy spot + short perpetual (cash &amp; carry)</h3>
-    <p class="note">Price moves cancel out; you earn the funding. Fees = open + close on both legs. Funding changes every period and can flip negative — these are current rates, not guarantees. You also need margin for the short.</p>
+    <p class="note">Price moves cancel out; you earn the funding every "Every" hours. Profit shown = holding for the chosen days at today's rate. Fees = open + close on both legs. Funding changes every period and can flip negative — not a guarantee. Capital needed ≈ investment for spot + 50–100% extra as margin for the short.</p>
     <div class="tablewrap"><table id="fdCarry"><thead><tr>
       <th class="l">Coin</th><th>Exchange</th><th>Funding</th><th>Every</th><th>APR</th><th>Fees</th><th>Break-even</th><th class="netd">Net after N days</th><th class="invh">Profit on $100</th>
     </tr></thead><tbody></tbody></table></div>

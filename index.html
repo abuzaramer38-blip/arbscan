@@ -12,7 +12,7 @@
   <div class="brand"><span class="logo">◈</span> ArbScan <span class="tag">read-only scanner</span></div>
   <div class="controls">
     <label class="inv">Investment $ <input id="inv" type="number" step="10" min="1" value="100"></label>
-    <label class="inv">Min 24h volume $ <input id="minVol" type="number" step="50000" min="0" value="250000"></label>
+    <label class="inv">Min 24h volume $ <input id="minVol" type="number" step="50000" min="10000" value="250000"></label>
     <label class="chk"><input type="checkbox" id="auto" checked> Auto</label>
     <select id="every" aria-label="refresh interval">
       <option value="5">5 s</option><option value="10" selected>10 s</option><option value="30">30 s</option><option value="60">60 s</option>
@@ -95,7 +95,7 @@
     <div class="prose">
       <h3>What is filtered out</h3>
       <ul>
-        <li>Markets with less 24h volume than <b>Min 24h volume</b> (dead or thin coins).</li>
+        <li>Markets with less 24h volume than <b>Min 24h volume</b> (dead or thin coins). Minimum allowed is $10k; an empty box resets to $250k.</li>
         <li>Leveraged tokens (BTC3L, ETHUP, …).</li>
       </ul>
       <h3>Before you trade a green row</h3>

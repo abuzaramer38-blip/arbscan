@@ -16,7 +16,11 @@ let fees = store.get("arbscan-fees", structuredClone(DEFAULT_FEES));
 const state = { raw: {}, clean: {}, fut: {}, spotMeta: {}, futMeta: {}, lastFut: 0 };
 const $ = (s) => document.querySelector(s);
 const inv = () => Math.max(1, parseFloat($("#inv").value) || 100);
-const minVol = () => Math.max(0, parseFloat($("#minVol").value) || 0);
+// empty / invalid box falls back to $250k; never fully off (hard floor $10k) so dead markets stay hidden
+const minVol = () => {
+  const v = parseFloat($("#minVol").value);
+  return Number.isFinite(v) ? Math.max(10000, v) : 250000;
+};
 
 // ---------- data
 async function load(kind, ex) {
@@ -177,7 +181,13 @@ document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () 
 ["#crMin", "#crFit", "#crClean"].forEach((s) => $(s).addEventListener("input", renderCross));
 ["#fdDays", "#fdSpotOnly"].forEach((s) => $(s).addEventListener("input", renderFunding));
 $("#inv").addEventListener("input", () => { store.set("arbscan-inv", inv()); renderAll(); });
-$("#minVol").addEventListener("change", () => { store.set("arbscan-minvol", minVol()); rebuildClean(); renderAll(); renderFees(); });
+$("#minVol").addEventListener("change", () => {
+  $("#minVol").value = minVol();
+  store.set("arbscan-minvol", minVol());
+  rebuildClean();
+  renderAll();
+  renderFees();
+});
 $("#feeTable").addEventListener("change", (e) => {
   const t = e.target;
   if (!t.dataset.ex) return;
@@ -210,7 +220,7 @@ $("#every").addEventListener("change", schedule);
 
 // ---------- init
 $("#inv").value = store.get("arbscan-inv", 100);
-$("#minVol").value = store.get("arbscan-minvol", 250000);
+$("#minVol").value = Math.max(10000, Number(store.get("arbscan-minvol", 250000)) || 250000);
 $("#triEx").innerHTML += EX.map((e) => `<option value="${e}">${nm(e)}</option>`).join("");
 document.querySelector(`.tab[data-tab="${store.get("arbscan-tab", "tri")}"]`)?.click();
 setHeaders();

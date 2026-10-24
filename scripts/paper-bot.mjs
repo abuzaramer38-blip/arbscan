@@ -4,8 +4,8 @@
 // Wallet 1 "funding": $100. Buys spot + shorts the perpetual on the same exchange (price risk cancels out),
 //   collects the funding the exchange REALLY paid (from its history), switches coin only when it clearly pays off.
 // Wallet 2 "instant": $100 split $50/$50 across two exchanges. Each hour, if the real order book allows buying on one
-//   exchange and selling on another at a profit right now, it books that trade (max one per hour, same route at most
-//   once per 24h because the coin can't be moved back instantly).
+//   exchange and selling on another at a profit right now, it books that trade (max one per hour). The coin then sits
+//   on the buying exchange, so that coin can only trade again in the reverse direction (which brings it back).
 //
 // usage: node scripts/paper-bot.mjs <state.json> <report.md>
 import fs from "node:fs";
@@ -152,15 +152,26 @@ async function instantStep() {
   const I = S.instant;
   const j = await get(`/api/instant?capital=${I.capital}`);
   I.checks++;
-  for (const k of Object.keys(I.taken)) if (now - I.taken[k] > 24 * H) delete I.taken[k];
+  // inventory: after buying on X and selling on Y, the coin sits on X and the USDT on Y.
+  // The same trade can only happen again after the opposite trade (buy on Y, sell on X) has moved things back.
+  if (!I.stuck) { // rebuild from past trades (older state files)
+    I.stuck = {};
+    for (const t of I.trades) { if (I.stuck[t.coin]) delete I.stuck[t.coin]; else I.stuck[t.coin] = { buy: t.buy, sell: t.sell, since: now }; }
+  }
   const rows = (j.cross?.rows || []).filter((r) => r.realProfit != null && r.realProfit >= INSTANT_MIN);
   I.seen += rows.length ? 1 : 0;
-  const pick = rows.find((r) => !I.taken[`${r.coin}|${r.buy}|${r.sell}`] && !I.taken[`coin|${r.coin}`]);
+  const allowed = (r) => {
+    const st = I.stuck[r.coin];
+    if (!st) return true;
+    return r.buy === st.sell && r.sell === st.buy; // the reverse trade rebalances
+  };
+  const pick = rows.find(allowed);
   if (pick) {
-    I.taken[`${pick.coin}|${pick.buy}|${pick.sell}`] = now;
-    I.taken[`coin|${pick.coin}`] = now;
+    const st = I.stuck[pick.coin];
+    if (st) delete I.stuck[pick.coin];
+    else I.stuck[pick.coin] = { buy: pick.buy, sell: pick.sell, since: now };
     I.profit += pick.realProfit;
-    I.trades.push({ t: iso(now), coin: pick.coin, buy: pick.buy, sell: pick.sell, size: pick.atSize, profit: pick.realProfit, gapPct: pick.topOfBookPct });
+    I.trades.push({ t: iso(now), coin: pick.coin, buy: pick.buy, sell: pick.sell, size: pick.atSize, profit: pick.realProfit, gapPct: pick.topOfBookPct, rebalanced: !!st });
     if (I.trades.length > 500) I.trades = I.trades.slice(-500);
   }
 }
@@ -187,7 +198,7 @@ const lines = [
   ``,
   `**Funding wallet**: funding received $${F.earned.toFixed(3)}, fees+spread paid $${F.costs.toFixed(3)}${F.pos ? `, holding **${F.pos.base} on ${F.pos.ex}** since ${iso(F.pos.openedAt)} (${F.pos.payments} payments, $${F.pos.earned.toFixed(3)})` : ", not holding anything"}.`,
   ``,
-  `**Instant wallet**: ${I.trades.length} trades in ${I.checks} checks; a profitable gap existed in ${I.seen} of ${I.checks} checks. Optimistic: assumes the coin was already sitting on the selling exchange.`,
+  `**Instant wallet**: ${I.trades.length} trades in ${I.checks} checks; a profitable gap existed in ${I.seen} of ${I.checks} checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: ${Object.keys(I.stuck || {}).join(", ") || "none"}.`,
   ``,
   `## Funding wallet actions (last 15)`,
   ...F.log.filter((x) => x.action !== "WAIT").slice(-15).map((x) => `- ${x.t} **${x.action}** ${x.what} — ${x.why}${x.earned != null ? ` (earned $${x.earned}, ${x.payments} payments)` : ""}`),

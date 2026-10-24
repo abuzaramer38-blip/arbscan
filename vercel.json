@@ -1,7 +1,31 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "regions": ["fra1"],
+  "regions": [
+    "fra1"
+  ],
   "functions": {
-    "api/*.js": { "maxDuration": 20 }
-  }
+    "api/*.js": {
+      "maxDuration": 20
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)\\.(html|js|css)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate"
+        }
+      ]
+    }
+  ]
 }

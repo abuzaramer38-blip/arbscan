@@ -60,3 +60,6 @@ td input[type=number] { width: 80px; }
 .best { border: 1px solid var(--line); border-left: 4px solid var(--mute); background: var(--panel); border-radius: 10px; padding: 10px 14px; margin: 8px 0 6px; font-size: 15px; }
 .best.yes { border-left-color: var(--pos); }
 .best.none { border-left-color: var(--warn); }
+.btn.mini { padding: 3px 9px; font-size: 12px; border-radius: 6px; }
+.btn.mini.ghost { margin-top: 0; }
+.split { margin: 4px 0 10px; }

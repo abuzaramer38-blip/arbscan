@@ -27,7 +27,9 @@
 <nav class="tabs" role="tablist">
   <button class="tab active" data-tab="tri">Triangular</button>
   <button class="tab" data-tab="cross">Cross-exchange</button>
+  <button class="tab" data-tab="perp">Futures gap</button>
   <button class="tab" data-tab="fund">Funding rate</button>
+  <button class="tab" data-tab="paper">Paper trades</button>
   <button class="tab" data-tab="fees">Fees</button>
   <button class="tab" data-tab="help">Guide</button>
 </nav>
@@ -54,14 +56,31 @@
   <section class="panel" id="tab-cross">
     <div class="filters">
       <label>Min profit % <input id="crMin" type="number" step="0.05" value="0"></label>
+      <label class="chk"><input type="checkbox" id="crInv"> I already hold coin + USDT on both exchanges (instant, no transfer)</label>
       <label class="chk"><input type="checkbox" id="crFit"> Only if my investment fits</label>
       <label class="chk"><input type="checkbox" id="crClean" checked> Hide fake gaps (&gt;3% or size &lt; $10)</label>
       <span class="muted" id="crInfo"></span>
     </div>
     <div class="best" id="crBest">Checking…</div>
-    <p class="note">Buy where it is cheapest, send the coin, sell where it is most expensive. One-time profit. <b>You keep</b> = after both taker fees and a withdrawal fee (set in the Fees tab, default $1), only on the amount that fits at the best price. <b>Not included:</b> the price can move during the 10 min–2 h transfer. Gaps above 3% are hidden — almost always the transfer is closed or it is a different token.</p>
+    <p class="note">Buy where it is cheapest, send the coin, sell where it is most expensive. One-time profit. <b>You keep</b> = after both taker fees and a withdrawal fee (set in the Fees tab, default $1), only on the amount that fits at the best price. <b>Not included:</b> the price can move during the 10 min–2 h transfer. Gaps above 3% are hidden — almost always the transfer is closed or it is a different token.<br>
+    <b>Real order book</b>: for the top rows we read 20–100 price levels on both exchanges and walk them with your money — this is the most honest number on the page.
+    <b>Instant mode</b> (checkbox): keep USDT on the cheap exchange and the coin on the expensive one; buy and sell in the same second, no transfer and no withdrawal fee. Rebalance later with the opposite gap or one cheap transfer. Check the token's contract address is the same on both exchanges.</p>
     <div class="tablewrap"><table id="crTable"><thead><tr>
-      <th class="l">Coin</th><th>Buy on</th><th>Sell on</th><th>Gap</th><th>After fees %</th><th class="invh">You keep on $100</th><th>Max size</th><th>Lowest 24h vol</th>
+      <th class="l">Coin</th><th>Buy on</th><th>Sell on</th><th>Gap</th><th>After fees %</th><th class="invh">You keep on $100</th><th>Real order book</th><th>Max size</th><th>Lowest 24h vol</th>
+    </tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <!-- FUTURES GAP -->
+  <section class="panel" id="tab-perp">
+    <div class="filters">
+      <label>Min after costs % <input id="pgMin" type="number" step="0.05" value="0"></label>
+      <label class="chk"><input type="checkbox" id="pgClean" checked> Hide fake gaps (&gt;3% or size &lt; $10)</label>
+      <span class="muted" id="pgInfo"></span>
+    </div>
+    <div class="best" id="pgBest">Checking…</div>
+    <p class="note">Cross-exchange <b>without any transfer</b>: the same coin's perpetual is cheaper on one exchange. Open a long there and a short on the other at the same moment, close both when the prices meet. Half your money is margin on each exchange (1x). <b>You keep</b> = entry gap − 4 taker fees (open + close, both sides) − the spread you pay when closing. <b>Funding/day</b> is what the pair pays (+) or costs (−) each day you wait. Risks: the gap can widen before it closes; keep enough margin and don't use high leverage.</p>
+    <div class="tablewrap"><table id="pgTable"><thead><tr>
+      <th class="l">Coin</th><th>Long (cheap)</th><th>Short (expensive)</th><th>Gap</th><th>After costs %</th><th class="invh">You keep on $100</th><th>Funding / day</th><th>Max size</th><th>Lowest 24h vol</th>
     </tr></thead><tbody></tbody></table></div>
   </section>
 
@@ -70,18 +89,31 @@
     <div class="filters">
       <label>Hold days <input id="fdDays" type="number" step="1" value="3" min="1"></label>
       <label class="chk"><input type="checkbox" id="fdSpotOnly" checked> Spot market must exist</label>
+      <label class="chk"><input type="checkbox" id="fdStable" checked> Only stable (≥80% of last 3 days paid us)</label>
+      <label class="chk"><input type="checkbox" id="fdUnified"> Unified account (spot counts as margin → ~80% of money working)</label>
+      <span class="muted" id="paperNote"></span>
       <span class="muted" id="fdInfo"></span>
     </div>
     <h3>1) Same exchange: buy spot + short perpetual (cash &amp; carry)</h3>
     <div class="best" id="fdBest">Checking…</div>
+    <p class="split" id="fdSplit"></p>
     <p class="note">Your investment is the <b>total</b> money: half buys the coin, half is margin for the short. Price moves cancel out; only the half-size position earns funding. We use the <b>lower</b> of today's rate and the last 3 days' average — a one-time spike is never projected forward. Costs = open + close fees on both legs + bid/ask spread. Coins without 3 days of history are not counted. Rates can still drop or turn negative.</p>
     <div class="tablewrap"><table id="fdCarry"><thead><tr>
-      <th class="l">Coin</th><th>Exchange</th><th>Funding now</th><th>3-day average</th><th>Counted (lower)</th><th>Costs</th><th>Break-even</th><th class="netd">You keep</th>
+      <th class="l">Coin</th><th>Exchange</th><th>Funding now</th><th>3-day average</th><th>Paid us</th><th>Counted (lower)</th><th>Costs</th><th>Break-even</th><th class="netd">You keep</th><th></th>
     </tr></thead><tbody></tbody></table></div>
     <h3>2) Two exchanges: short where funding is high, long where it is low</h3>
     <p class="note">Half the money is margin on each exchange. Same rule: the lower of today's gap and the 3-day average gap is used.</p>
     <div class="tablewrap"><table id="fdSpread"><thead><tr>
-      <th class="l">Coin</th><th>Short on</th><th>Long on</th><th>Gap now</th><th>3-day avg gap</th><th>Costs</th><th>Break-even</th><th class="netd">You keep</th>
+      <th class="l">Coin</th><th>Short on</th><th>Long on</th><th>Gap now</th><th>3-day avg gap</th><th>Costs</th><th>Break-even</th><th class="netd">You keep</th><th></th>
+    </tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <!-- PAPER -->
+  <section class="panel" id="tab-paper">
+    <p class="note">Test a funding trade <b>without money</b>. Press "Paper" on a Funding row; from that moment we add up the funding the exchange <b>actually paid</b> (from its history) and subtract all open + close costs. Check back after a few days — this is the real answer to "how much would I have made". Saved in this browser only. Price moves are not counted because both legs cancel them out.</p>
+    <p id="paperTotal" class="split"></p>
+    <div class="tablewrap"><table id="paperTable"><thead><tr>
+      <th class="l">Trade</th><th>Money</th><th>Started</th><th>Payments</th><th>Funding received</th><th>Costs</th><th>Net if closed now</th><th></th>
     </tr></thead><tbody></tbody></table></div>
   </section>
 
@@ -109,6 +141,14 @@
         <li>Profit is counted only on the part of your money the best price can absorb. Unknown size = not counted.</li>
         <li>Funding uses the <b>lower</b> of today's rate and the 3-day average, on the half of your money that is in the position. Spikes are labelled and never projected forward.</li>
         <li>If nothing is worth doing, the banner says so. That is the normal state for most of the day.</li>
+      </ul>
+      <h3>The tabs in one line each</h3>
+      <ul>
+        <li><b>Triangular</b>: 3 trades on one exchange. Real, but bots take these in milliseconds.</li>
+        <li><b>Cross-exchange</b>: buy cheap here, sell dear there. Tick <b>instant mode</b> if you pre-hold coin + USDT on both sides. "Real order book" is the number to trust.</li>
+        <li><b>Futures gap</b>: same idea with perpetuals on both exchanges — no transfer at all.</li>
+        <li><b>Funding rate</b>: earn the funding payments while price risk cancels out. Use "Only stable" and spread money over several coins.</li>
+        <li><b>Paper trades</b>: press "Paper" on a funding row and come back in a few days to see what it really paid — before using real money.</li>
       </ul>
       <h3>Before you trade a green row</h3>
       <ul>

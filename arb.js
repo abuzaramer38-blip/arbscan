@@ -196,10 +196,10 @@ export function avgDailyPct(hist, ivh, minPoints = 3) {
  * Funding is earned on the C/2 position only. Rate used = the LOWER of now and the 3-day average.
  * costs: open+close taker fees on both legs + crossing the bid/ask spread on both legs.
  */
-export function honestCarry({ dailyNowPct, avgDaily, spotFee, futFee, spreadPct, capital, days }) {
+export function honestCarry({ dailyNowPct, avgDaily, spotFee, futFee, spreadPct, capital, days, share = 0.5 }) {
   if (avgDaily == null) return null;
   const usedDaily = Math.min(dailyNowPct, avgDaily);
-  const half = capital / 2;
+  const half = capital * share; // position size: 50% normally, ~80% with a unified account (spot is the margin)
   const feeUsd = half * (2 * spotFee + 2 * futFee) / 100;
   const spreadUsd = half * (2 * spreadPct) / 100; // spot spread + (assumed equal) perp spread
   const costUsd = feeUsd + spreadUsd;
@@ -230,6 +230,93 @@ export function honestOneOff({ pct, maxSize, capital, fixedCostUsd = 0 }) {
   if (maxSize == null) return null;
   const used = Math.min(capital, maxSize);
   return { used, netUsd: used * pct / 100 - fixedCostUsd, partial: maxSize < capital };
+}
+
+// ------------------------------------------------------------------ perp vs perp price gap
+/**
+ * Long the perp where it is cheap (ask on A), short where it is expensive (bid on B), close both when prices meet.
+ * perpsByEx: {ex: [[base, bid, ask, bidQty, askQty, vol, sym]]}; futFees: {ex: taker %}
+ * net % = entry gap − 4 taker fees (open+close, both sides) − half of both spreads (paid again when closing).
+ */
+export function perpGap(perpsByEx, futFees, minPct = -0.2, limit = 300, minVolUsd = 0) {
+  const book = new Map();
+  for (const [ex, rows] of Object.entries(perpsByEx)) {
+    for (const [base, bid, ask, bq, aq, vol, sym] of rows) {
+      if (minVolUsd > 0 && !(vol >= minVolUsd)) continue;
+      if (!book.has(base)) book.set(base, []);
+      book.get(base).push({ ex, bid, ask, bq, aq, vol, sym });
+    }
+  }
+  const out = [];
+  for (const [base, list] of book) {
+    if (list.length < 2) continue;
+    for (const a of list) {
+      for (const b of list) {
+        if (a.ex === b.ex) continue;
+        const gross = (b.bid / a.ask - 1) * 100;
+        const spreadA = ((a.ask - a.bid) / ((a.ask + a.bid) / 2)) * 100;
+        const spreadB = ((b.ask - b.bid) / ((b.ask + b.bid) / 2)) * 100;
+        const fees = 2 * ((futFees[a.ex] ?? 0.05) + (futFees[b.ex] ?? 0.05));
+        const pct = gross - fees - (spreadA + spreadB) / 2;
+        if (pct < minPct) continue;
+        const qty = a.aq > 0 && b.bq > 0 ? Math.min(a.aq, b.bq) : NaN; // one side unknown -> size unknown, not counted
+        out.push({
+          base, longEx: a.ex, longSym: a.sym, shortEx: b.ex, shortSym: b.sym, long: a.ask, short: b.bid,
+          gross, feesPct: fees, spreadPct: (spreadA + spreadB) / 2, pct,
+          maxUsd: Number.isFinite(qty) ? qty * a.ask : null, minVol: Math.min(a.vol || 0, b.vol || 0),
+        });
+      }
+    }
+  }
+  out.sort((x, y) => y.pct - x.pct);
+  return out.slice(0, limit);
+}
+
+// ------------------------------------------------------------------ order-book fills
+/** Spend `usd` buying through asks [[px, qty]] (best first). */
+export function fillBuy(asks, usd) {
+  let left = usd, qty = 0;
+  for (const [px, q] of asks) {
+    const cost = px * q;
+    if (cost >= left) { qty += left / px; left = 0; break; }
+    qty += q; left -= cost;
+  }
+  return { qty, spent: usd - left, full: left <= 1e-9 };
+}
+/** Sell `qty` through bids [[px, qty]] (best first). */
+export function fillSell(bids, qty) {
+  let left = qty, usd = 0;
+  for (const [px, q] of bids) {
+    if (q >= left) { usd += left * px; left = 0; break; }
+    usd += q * px; left -= q;
+  }
+  return { usd, sold: qty - left, full: left <= 1e-12 };
+}
+/** Real cross-exchange result on the order books: buy with `usd` on A, sell that coin on B. Fees in %, fixedUsd e.g. withdrawal. */
+export function crossFill(asksA, bidsB, usd, feeA, feeB, fixedUsd = 0) {
+  const b = fillBuy(asksA, usd);
+  const qty = b.qty * (1 - feeA / 100);
+  const s = fillSell(bidsB, qty);
+  const got = s.usd * (1 - feeB / 100);
+  // unsold coin (book too thin) is valued at 0 profit: we only count what we can actually sell
+  const spentForSold = qty > 0 ? b.spent * (s.sold / qty) : 0;
+  return { spent: spentForSold, got, profit: got - spentForSold - fixedUsd, full: b.full && s.full };
+}
+/** Try several sizes up to `maxUsd`; return the size that keeps the most dollars. */
+export function bestCrossSize(asksA, bidsB, maxUsd, feeA, feeB, fixedUsd = 0) {
+  const sizes = [5, 10, 20, 30, 50, 75, 100, 150, 200, 300, 500, 750, 1000, 2000, 5000, 10000].filter((x) => x < maxUsd).concat([maxUsd]);
+  let best = null;
+  for (const u of sizes) {
+    const r = crossFill(asksA, bidsB, u, feeA, feeB, fixedUsd);
+    if (!best || r.profit > best.profit) best = { size: r.spent, ...r };
+  }
+  return best;
+}
+
+/** Share of funding payments that were positive (for the side that receives). */
+export function positiveShare(hist, sign = 1) {
+  if (!hist || !hist.length) return null;
+  return hist.filter((h) => sign * h.rate > 0).length / hist.length;
 }
 
 export function fmtPx(p) {

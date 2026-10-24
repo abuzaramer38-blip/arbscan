@@ -7,6 +7,10 @@ No API keys, no trading — public market data only.
 - **Triangular** (same exchange): `USDT → A → B → USDT`, after 3 taker fees, with top-of-book size.
 - **Exchange ↔ exchange**: buy where the ask is lowest, sell where the bid is highest (taker fees on both sides; withdrawal fees not included).
 - **Honest numbers**: every "You keep" figure is after fees, spread and withdrawal fee, only on the size that fits; funding uses the lower of today's rate and the 3-day average (`api/history.js`).
+- **Futures gap** (`api/perps.js`): perp vs perp on two exchanges — long the cheap one, short the expensive one, no transfer.
+- **Real order book** (`api/depth.js`): top cross-exchange rows are walked through 20–100 book levels with your amount; best size shown.
+- **Instant mode**: cross-exchange with coin + USDT pre-held on both exchanges (no transfer, no withdrawal fee).
+- **Paper trades**: track a funding trade in the browser and see the funding actually paid since you started, minus costs.
 - **Funding rate**:
   - cash & carry on one exchange (long spot + short perpetual),
   - cross-exchange funding spread (short the high-funding perp, long the low one),

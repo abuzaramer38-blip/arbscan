@@ -84,3 +84,18 @@ const hourly = Array.from({ length: 10 }, (_, i) => ({ t: 1e12 - i * 3600000, ra
 assert.equal(histInterval(hourly), 1);
 assert.ok(Math.abs(avgDailyPct(hourly, 8) - 2.4) < 1e-9, "0.1%/h = 2.4%/day, not 0.3%");
 console.log("interval tests passed");
+// 7) perp gap + order-book fills
+import { perpGap, fillBuy, fillSell, crossFill, bestCrossSize } from "../arb.js";
+const pg = perpGap({ a: [["X", 99.9, 100, 10, 10, 1e6, "XUSDT"]], b: [["X", 101, 101.1, 10, 10, 1e6, "X_USDT"]] }, { a: 0.05, b: 0.05 }, -10);
+const g0 = pg[0];
+assert.equal(g0.longEx, "a"); assert.equal(g0.shortEx, "b");
+const sA = 0.1 / 99.95 * 100, sB = 0.1 / 101.05 * 100;
+assert.ok(Math.abs(g0.pct - (1 - 0.2 - (sA + sB) / 2)) < 1e-9, `perp ${g0.pct}`);
+const asks = [[1, 10], [1.1, 10]], bids = [[1.2, 5], [1.0, 100]];
+assert.ok(Math.abs(fillBuy(asks, 15).qty - (10 + 5 / 1.1)) < 1e-9);
+assert.ok(Math.abs(fillSell(bids, 8).usd - (6 + 3)) < 1e-9);
+const cf = crossFill([[1, 100]], [[1.01, 50]], 100, 0, 0, 0); // only 50 can be sold
+assert.ok(Math.abs(cf.spent - 50) < 1e-9 && Math.abs(cf.profit - 0.5) < 1e-9 && !cf.full);
+const bs = bestCrossSize([[1, 30], [1.02, 1000]], [[1.01, 1000]], 200, 0, 0, 0);
+assert.ok(Math.abs(bs.size - 30) < 1e-9 && Math.abs(bs.profit - 0.3) < 1e-9, JSON.stringify(bs));
+console.log("perp gap + depth tests passed");

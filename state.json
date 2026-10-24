@@ -1,0 +1,53 @@
+{
+ "started": 1792875733462,
+ "runs": 1,
+ "errors": [],
+ "funding": {
+  "capital": 100,
+  "earned": 0,
+  "costs": 0.11753397467992296,
+  "pos": {
+   "ex": "kucoin",
+   "base": "JCT",
+   "sym": "JCTUSDTM",
+   "ivh": 4,
+   "cost": 0.23506794935984593,
+   "openedAt": 1792875733462,
+   "creditedTo": 1792875733462,
+   "earned": 0,
+   "payments": 0,
+   "scoreAtOpen": 0.5973
+  },
+  "lastDecision": 1792875733462,
+  "log": [
+   {
+    "t": "2026-10-24 21:02 UTC",
+    "action": "BUY",
+    "what": "JCT on kucoin",
+    "why": "paid 0.597%/day last 24h, cost $0.235"
+   }
+  ]
+ },
+ "instant": {
+  "capital": 100,
+  "profit": 1.533,
+  "trades": [
+   {
+    "t": "2026-10-24 21:02 UTC",
+    "coin": "ANIME",
+    "buy": "okx",
+    "sell": "mexc",
+    "size": 50,
+    "profit": 1.533,
+    "gapPct": 2.997
+   }
+  ],
+  "taken": {
+   "ANIME|okx|mexc": 1792875733462,
+   "coin|ANIME": 1792875733462
+  },
+  "checks": 1,
+  "seen": 1
+ },
+ "lastRun": 1792875733462
+}

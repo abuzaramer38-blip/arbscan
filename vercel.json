@@ -27,5 +27,10 @@
         }
       ]
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "paper-data": false
+    }
+  }
 }

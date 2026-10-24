@@ -34,3 +34,8 @@ Serverless functions run in `fra1` (Frankfurt) because several exchanges block U
 ## Caveats
 Opportunities shown are snapshots of the best bid/ask. Real fills depend on order-book depth, latency,
 deposit/withdrawal status, networks and fee tier. This is not financial advice.
+
+## Paper bot (no real money)
+`scripts/paper-bot.mjs` runs every hour on GitHub Actions (`.github/workflows/paper-bot.yml`) and keeps two $100 paper wallets:
+funding carry and instant buy-and-sell. State and `REPORT.md` live on the `paper-data` branch; each run's report is also in the
+Actions run summary. Data comes from this project's Vercel API (Frankfurt).

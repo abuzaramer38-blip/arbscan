@@ -1,6 +1,6 @@
 {
  "started": 1792875733462,
- "runs": 1,
+ "runs": 2,
  "errors": [],
  "funding": {
   "capital": 100,
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 1.533,
+  "profit": 2.52,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -40,14 +40,36 @@
     "size": 50,
     "profit": 1.533,
     "gapPct": 2.997
+   },
+   {
+    "t": "2026-10-24 23:05 UTC",
+    "coin": "MAPO",
+    "buy": "htx",
+    "sell": "kucoin",
+    "size": 50,
+    "profit": 0.987,
+    "gapPct": 2.641,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 1,
-  "seen": 1
+  "checks": 2,
+  "seen": 2,
+  "stuck": {
+   "ANIME": {
+    "buy": "okx",
+    "sell": "mexc",
+    "since": 1792883104000
+   },
+   "MAPO": {
+    "buy": "htx",
+    "sell": "kucoin",
+    "since": 1792883104000
+   }
+  }
  },
- "lastRun": 1792875733462
+ "lastRun": 1792883104000
 }

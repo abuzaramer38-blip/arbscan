@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 7,
+ "runs": 8,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 0.20245000000000002,
+  "earned": 0.2252,
   "costs": 0.11753397467992296,
   "pos": {
    "ex": "kucoin",
@@ -13,9 +13,9 @@
    "ivh": 4,
    "cost": 0.23506794935984593,
    "openedAt": 1792875733462,
-   "creditedTo": 1792944000000,
-   "earned": 0.20245000000000002,
-   "payments": 5,
+   "creditedTo": 1792958400000,
+   "earned": 0.2252,
+   "payments": 6,
    "scoreAtOpen": 0.5973
   },
   "lastDecision": 1792943953508,
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 8.198,
+  "profit": 8.972000000000001,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -100,14 +100,24 @@
     "profit": 1.375,
     "gapPct": 2.805,
     "rebalanced": false
+   },
+   {
+    "t": "2026-10-25 21:38 UTC",
+    "coin": "ASSET",
+    "buy": "kucoin",
+    "sell": "mexc",
+    "size": 50,
+    "profit": 0.774,
+    "gapPct": 2.666,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 7,
-  "seen": 7,
+  "checks": 8,
+  "seen": 8,
   "stuck": {
    "ANIME": {
     "buy": "okx",
@@ -143,8 +153,13 @@
     "buy": "htx",
     "sell": "okx",
     "since": 1792954406354
+   },
+   "ASSET": {
+    "buy": "kucoin",
+    "sell": "mexc",
+    "since": 1792964323757
    }
   }
  },
- "lastRun": 1792954406354
+ "lastRun": 1792964323757
 }

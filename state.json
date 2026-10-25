@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 4,
+ "runs": 5,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 0.11435000000000001,
+  "earned": 0.1531,
   "costs": 0.11753397467992296,
   "pos": {
    "ex": "kucoin",
@@ -13,9 +13,9 @@
    "ivh": 4,
    "cost": 0.23506794935984593,
    "openedAt": 1792875733462,
-   "creditedTo": 1792900800000,
-   "earned": 0.11435000000000001,
-   "payments": 2,
+   "creditedTo": 1792915200000,
+   "earned": 0.1531,
+   "payments": 3,
    "scoreAtOpen": 0.5973
   },
   "lastDecision": 1792907684168,
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 5.061,
+  "profit": 6.088,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -70,14 +70,24 @@
     "profit": 1.106,
     "gapPct": 2.311,
     "rebalanced": false
+   },
+   {
+    "t": "2026-10-25 11:12 UTC",
+    "coin": "IOST",
+    "buy": "bitget",
+    "sell": "okx",
+    "size": 50,
+    "profit": 1.027,
+    "gapPct": 2.031,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 4,
-  "seen": 4,
+  "checks": 5,
+  "seen": 5,
   "stuck": {
    "ANIME": {
     "buy": "okx",
@@ -98,8 +108,13 @@
     "buy": "mexc",
     "sell": "bitget",
     "since": 1792907684168
+   },
+   "IOST": {
+    "buy": "bitget",
+    "sell": "okx",
+    "since": 1792926752280
    }
   }
  },
- "lastRun": 1792907684168
+ "lastRun": 1792926752280
 }

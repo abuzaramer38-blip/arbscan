@@ -1,15 +1,15 @@
 # Paper bot report
 
-Running since **2026-10-24 21:02 UTC** (1.13 days, 9 hourly runs). Last run 2026-10-26 00:05 UTC. No real money.
+Running since **2026-10-24 21:02 UTC** (1.31 days, 10 hourly runs). Last run 2026-10-26 04:34 UTC. No real money.
 
 | Wallet | Start | Now (if closed now) | Profit |
 |---|---|---|---|
-| Funding (spot + short) | $100 | $100.01 | +$0.01 |
-| Instant buy & sell | $100 | $109.71 | +$9.71 |
+| Funding (spot + short) | $100 | $100.03 | +$0.03 |
+| Instant buy & sell | $100 | $110.57 | +$10.57 |
 
-**Funding wallet**: funding received $0.240, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (7 payments, $0.240).
+**Funding wallet**: funding received $0.265, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (8 payments, $0.265).
 
-**Instant wallet**: 9 trades in 9 checks; a profitable gap existed in 9 of 9 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: ANIME, MAPO, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC.
+**Instant wallet**: 10 trades in 10 checks; a profitable gap existed in 10 of 10 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: ANIME, MAPO, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC, MTL.
 
 ## Funding wallet actions (last 15)
 - 2026-10-24 21:02 UTC **BUY** JCT on kucoin — paid 0.597%/day last 24h, cost $0.235
@@ -24,5 +24,6 @@ Running since **2026-10-24 21:02 UTC** (1.13 days, 9 hourly runs). Last run 2026
 - 2026-10-25 18:53 UTC ZIL: buy htx, sell okx, $50 → +$1.375
 - 2026-10-25 21:38 UTC ASSET: buy kucoin, sell mexc, $50 → +$0.774
 - 2026-10-26 00:05 UTC UPC: buy mexc, sell bitget, $50 → +$0.734
+- 2026-10-26 04:34 UTC MTL: buy htx, sell gate, $50 → +$0.868
 
 No errors.

@@ -1,15 +1,15 @@
 # Paper bot report
 
-Running since **2026-10-24 21:02 UTC** (1.84 days, 12 hourly runs). Last run 2026-10-26 17:16 UTC. No real money.
+Running since **2026-10-24 21:02 UTC** (2.06 days, 13 hourly runs). Last run 2026-10-26 22:35 UTC. No real money.
 
 | Wallet | Start | Now (if closed now) | Profit |
 |---|---|---|---|
-| Funding (spot + short) | $100 | $100.14 | +$0.14 |
-| Instant buy & sell | $100 | $112.06 | +$12.06 |
+| Funding (spot + short) | $100 | $100.18 | +$0.18 |
+| Instant buy & sell | $100 | $112.80 | +$12.80 |
 
-**Funding wallet**: funding received $0.373, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (11 payments, $0.373).
+**Funding wallet**: funding received $0.412, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (12 payments, $0.412).
 
-**Instant wallet**: 12 trades in 12 checks; a profitable gap existed in 12 of 12 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: ANIME, MAPO, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC, MTL, TORN, ACN.
+**Instant wallet**: 13 trades in 13 checks; a profitable gap existed in 13 of 13 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: ANIME, MAPO, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC, MTL, TORN, ACN, VERONA.
 
 ## Funding wallet actions (last 15)
 - 2026-10-24 21:02 UTC **BUY** JCT on kucoin — paid 0.597%/day last 24h, cost $0.235
@@ -27,5 +27,6 @@ Running since **2026-10-24 21:02 UTC** (1.84 days, 12 hourly runs). Last run 202
 - 2026-10-26 04:34 UTC MTL: buy htx, sell gate, $50 → +$0.868
 - 2026-10-26 10:57 UTC TORN: buy htx, sell mexc, $50 → +$0.748
 - 2026-10-26 17:16 UTC ACN: buy kucoin, sell htx, $50 → +$0.742
+- 2026-10-26 22:35 UTC VERONA: buy bybit, sell mexc, $50 → +$0.737
 
 No errors.

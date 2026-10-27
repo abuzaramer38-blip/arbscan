@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 15,
+ "runs": 16,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 0.4699,
+  "earned": 0.478,
   "costs": 0.11753397467992296,
   "pos": {
    "ex": "kucoin",
@@ -13,9 +13,9 @@
    "ivh": 4,
    "cost": 0.23506794935984593,
    "openedAt": 1792875733462,
-   "creditedTo": 1793073600000,
-   "earned": 0.4699,
-   "payments": 14,
+   "creditedTo": 1793102400000,
+   "earned": 0.478,
+   "payments": 16,
    "scoreAtOpen": 0.5973
   },
   "lastDecision": 1793086827108,
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 14.579,
+  "profit": 15.610000000000001,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -180,14 +180,24 @@
     "profit": 0.819,
     "gapPct": 1.54,
     "rebalanced": false
+   },
+   {
+    "t": "2026-10-27 14:20 UTC",
+    "coin": "IEFAON",
+    "buy": "gate",
+    "sell": "mexc",
+    "size": 50,
+    "profit": 1.031,
+    "gapPct": 2.168,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 15,
-  "seen": 15,
+  "checks": 16,
+  "seen": 16,
   "stuck": {
    "ANIME": {
     "buy": "okx",
@@ -263,8 +273,13 @@
     "buy": "gate",
     "sell": "htx",
     "since": 1793086827108
+   },
+   "IEFAON": {
+    "buy": "gate",
+    "sell": "mexc",
+    "since": 1793110826817
    }
   }
  },
- "lastRun": 1793086827108
+ "lastRun": 1793110826817
 }

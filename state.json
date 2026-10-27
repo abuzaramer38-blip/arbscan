@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 16,
+ "runs": 17,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 0.478,
+  "earned": 0.5255,
   "costs": 0.11753397467992296,
   "pos": {
    "ex": "kucoin",
@@ -13,12 +13,12 @@
    "ivh": 4,
    "cost": 0.23506794935984593,
    "openedAt": 1792875733462,
-   "creditedTo": 1793102400000,
-   "earned": 0.478,
-   "payments": 16,
+   "creditedTo": 1793131200000,
+   "earned": 0.5255,
+   "payments": 18,
    "scoreAtOpen": 0.5973
   },
-  "lastDecision": 1793086827108,
+  "lastDecision": 1793131201632,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 15.610000000000001,
+  "profit": 16.613,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -190,14 +190,24 @@
     "profit": 1.031,
     "gapPct": 2.168,
     "rebalanced": false
+   },
+   {
+    "t": "2026-10-27 20:00 UTC",
+    "coin": "DIAM",
+    "buy": "kucoin",
+    "sell": "bybit",
+    "size": 50,
+    "profit": 1.003,
+    "gapPct": 2.168,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 16,
-  "seen": 16,
+  "checks": 17,
+  "seen": 17,
   "stuck": {
    "ANIME": {
     "buy": "okx",
@@ -278,8 +288,13 @@
     "buy": "gate",
     "sell": "mexc",
     "since": 1793110826817
+   },
+   "DIAM": {
+    "buy": "kucoin",
+    "sell": "bybit",
+    "since": 1793131201632
    }
   }
  },
- "lastRun": 1793110826817
+ "lastRun": 1793131201632
 }

@@ -1,6 +1,6 @@
 {
  "started": 1792875733462,
- "runs": 17,
+ "runs": 18,
  "errors": [],
  "funding": {
   "capital": 100,
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 16.613,
+  "profit": 17.639,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -200,14 +200,24 @@
     "profit": 1.003,
     "gapPct": 2.168,
     "rebalanced": false
+   },
+   {
+    "t": "2026-10-27 23:41 UTC",
+    "coin": "ACNON",
+    "buy": "gate",
+    "sell": "mexc",
+    "size": 50,
+    "profit": 1.026,
+    "gapPct": 2.439,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 17,
-  "seen": 17,
+  "checks": 18,
+  "seen": 18,
   "stuck": {
    "ANIME": {
     "buy": "okx",
@@ -293,8 +303,13 @@
     "buy": "kucoin",
     "sell": "bybit",
     "since": 1793131201632
+   },
+   "ACNON": {
+    "buy": "gate",
+    "sell": "mexc",
+    "since": 1793144513896
    }
   }
  },
- "lastRun": 1793131201632
+ "lastRun": 1793144513896
 }

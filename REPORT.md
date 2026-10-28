@@ -1,21 +1,20 @@
 # Paper bot report
 
-Running since **2026-10-24 21:02 UTC** (3.35 days, 19 hourly runs). Last run 2026-10-28 05:23 UTC. No real money.
+Running since **2026-10-24 21:02 UTC** (3.65 days, 20 hourly runs). Last run 2026-10-28 12:39 UTC. No real money.
 
 | Wallet | Start | Now (if closed now) | Profit |
 |---|---|---|---|
-| Funding (spot + short) | $100 | $100.33 | +$0.33 |
-| Instant buy & sell | $100 | $118.24 | +$18.24 |
+| Funding (spot + short) | $100 | $100.36 | +$0.36 |
+| Instant buy & sell | $100 | $119.21 | +$19.21 |
 
-**Funding wallet**: funding received $0.570, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (20 payments, $0.570).
+**Funding wallet**: funding received $0.596, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (22 payments, $0.596).
 
-**Instant wallet**: 19 trades in 19 checks; a profitable gap existed in 19 of 19 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: ANIME, MAPO, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON.
+**Instant wallet**: 20 trades in 20 checks; a profitable gap existed in 20 of 20 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: ANIME, MAPO, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO.
 
 ## Funding wallet actions (last 15)
 - 2026-10-24 21:02 UTC **BUY** JCT on kucoin — paid 0.597%/day last 24h, cost $0.235
 
 ## Instant trades (last 15)
-- 2026-10-25 11:12 UTC IOST: buy bitget, sell okx, $50 → +$1.027
 - 2026-10-25 15:59 UTC XEC: buy binance, sell kucoin, $50 → +$0.735
 - 2026-10-25 18:53 UTC ZIL: buy htx, sell okx, $50 → +$1.375
 - 2026-10-25 21:38 UTC ASSET: buy kucoin, sell mexc, $50 → +$0.774
@@ -30,5 +29,6 @@ Running since **2026-10-24 21:02 UTC** (3.35 days, 19 hourly runs). Last run 202
 - 2026-10-27 20:00 UTC DIAM: buy kucoin, sell bybit, $50 → +$1.003
 - 2026-10-27 23:41 UTC ACNON: buy gate, sell mexc, $50 → +$1.026
 - 2026-10-28 05:23 UTC JPMON: buy gate, sell mexc, $50 → +$0.605
+- 2026-10-28 12:39 UTC OSMO: buy gate, sell kucoin, $50 → +$0.962
 
 No errors.

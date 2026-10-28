@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 19,
+ "runs": 20,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 0.5696,
+  "earned": 0.5957,
   "costs": 0.11753397467992296,
   "pos": {
    "ex": "kucoin",
@@ -13,9 +13,9 @@
    "ivh": 4,
    "cost": 0.23506794935984593,
    "openedAt": 1792875733462,
-   "creditedTo": 1793160000000,
-   "earned": 0.5696,
-   "payments": 20,
+   "creditedTo": 1793188800000,
+   "earned": 0.5957,
+   "payments": 22,
    "scoreAtOpen": 0.5973
   },
   "lastDecision": 1793165031819,
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 18.244,
+  "profit": 19.206,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -220,14 +220,24 @@
     "profit": 0.605,
     "gapPct": 1.486,
     "rebalanced": false
+   },
+   {
+    "t": "2026-10-28 12:39 UTC",
+    "coin": "OSMO",
+    "buy": "gate",
+    "sell": "kucoin",
+    "size": 50,
+    "profit": 0.962,
+    "gapPct": 2.252,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 19,
-  "seen": 19,
+  "checks": 20,
+  "seen": 20,
   "stuck": {
    "ANIME": {
     "buy": "okx",
@@ -323,8 +333,13 @@
     "buy": "gate",
     "sell": "mexc",
     "since": 1793165031819
+   },
+   "OSMO": {
+    "buy": "gate",
+    "sell": "kucoin",
+    "since": 1793191159043
    }
   }
  },
- "lastRun": 1793165031819
+ "lastRun": 1793191159043
 }

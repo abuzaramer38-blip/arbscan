@@ -1,21 +1,20 @@
 # Paper bot report
 
-Running since **2026-10-24 21:02 UTC** (4.22 days, 23 hourly runs). Last run 2026-10-29 02:21 UTC. No real money.
+Running since **2026-10-24 21:02 UTC** (4.53 days, 24 hourly runs). Last run 2026-10-29 09:46 UTC. No real money.
 
 | Wallet | Start | Now (if closed now) | Profit |
 |---|---|---|---|
-| Funding (spot + short) | $100 | $100.38 | +$0.38 |
-| Instant buy & sell | $100 | $122.20 | +$22.20 |
+| Funding (spot + short) | $100 | $100.41 | +$0.41 |
+| Instant buy & sell | $100 | $123.14 | +$23.14 |
 
-**Funding wallet**: funding received $0.618, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (25 payments, $0.618).
+**Funding wallet**: funding received $0.646, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (27 payments, $0.646).
 
-**Instant wallet**: 23 trades in 23 checks; a profitable gap existed in 23 of 23 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: ANIME, MAPO, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, AO, NIL, ETN.
+**Instant wallet**: 24 trades in 24 checks; a profitable gap existed in 24 of 24 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: ANIME, MAPO, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, AO, NIL, ETN, INIT.
 
 ## Funding wallet actions (last 15)
 - 2026-10-24 21:02 UTC **BUY** JCT on kucoin — paid 0.597%/day last 24h, cost $0.235
 
 ## Instant trades (last 15)
-- 2026-10-26 00:05 UTC UPC: buy mexc, sell bitget, $50 → +$0.734
 - 2026-10-26 04:34 UTC MTL: buy htx, sell gate, $50 → +$0.868
 - 2026-10-26 10:57 UTC TORN: buy htx, sell mexc, $50 → +$0.748
 - 2026-10-26 17:16 UTC ACN: buy kucoin, sell htx, $50 → +$0.742
@@ -30,5 +29,6 @@ Running since **2026-10-24 21:02 UTC** (4.22 days, 23 hourly runs). Last run 202
 - 2026-10-28 18:46 UTC AO: buy gate, sell mexc, $50 → +$0.9
 - 2026-10-28 23:05 UTC NIL: buy binance, sell htx, $50 → +$1.008
 - 2026-10-29 02:21 UTC ETN: buy mexc, sell htx, $50 → +$1.09
+- 2026-10-29 09:46 UTC INIT: buy htx, sell binance, $50 → +$0.932
 
 No errors.

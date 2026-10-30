@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 29,
+ "runs": 30,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 0.7346500000000001,
+  "earned": 0.7562500000000001,
   "costs": 0.11753397467992296,
   "pos": {
    "ex": "kucoin",
@@ -13,12 +13,12 @@
    "ivh": 4,
    "cost": 0.23506794935984593,
    "openedAt": 1792875733462,
-   "creditedTo": 1793361600000,
-   "earned": 0.7346500000000001,
-   "payments": 34,
+   "creditedTo": 1793390400000,
+   "earned": 0.7562500000000001,
+   "payments": 36,
    "scoreAtOpen": 0.5973
   },
-  "lastDecision": 1793348983629,
+  "lastDecision": 1793392755289,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 29.491999999999997,
+  "profit": 30.971999999999998,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -320,14 +320,24 @@
     "profit": 1.483,
     "gapPct": 2.948,
     "rebalanced": false
+   },
+   {
+    "t": "2026-10-30 20:39 UTC",
+    "coin": "AI",
+    "buy": "okx",
+    "sell": "binance",
+    "size": 50,
+    "profit": 1.48,
+    "gapPct": 2.959,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 29,
-  "seen": 29,
+  "checks": 30,
+  "seen": 30,
   "stuck": {
    "ANIME": {
     "buy": "okx",
@@ -473,8 +483,13 @@
     "buy": "binance",
     "sell": "htx",
     "since": 1793375297237
+   },
+   "AI": {
+    "buy": "okx",
+    "sell": "binance",
+    "since": 1793392755289
    }
   }
  },
- "lastRun": 1793375297237
+ "lastRun": 1793392755289
 }

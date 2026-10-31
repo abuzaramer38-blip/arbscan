@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 34,
+ "runs": 35,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 0.8458000000000001,
+  "earned": 0.8488000000000001,
   "costs": 0.11753397467992296,
   "pos": {
    "ex": "kucoin",
@@ -13,9 +13,9 @@
    "ivh": 4,
    "cost": 0.23506794935984593,
    "openedAt": 1792875733462,
-   "creditedTo": 1793462400000,
-   "earned": 0.8458000000000001,
-   "payments": 41,
+   "creditedTo": 1793476800000,
+   "earned": 0.8488000000000001,
+   "payments": 42,
    "scoreAtOpen": 0.5973
   },
   "lastDecision": 1793471164529,
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 34.036,
+  "profit": 35.355000000000004,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -370,14 +370,24 @@
     "profit": 1.651,
     "gapPct": 2.892,
     "rebalanced": false
+   },
+   {
+    "t": "2026-10-31 22:25 UTC",
+    "coin": "SOPH",
+    "buy": "mexc",
+    "sell": "okx",
+    "size": 50,
+    "profit": 1.319,
+    "gapPct": 2.889,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 34,
-  "seen": 34,
+  "checks": 35,
+  "seen": 35,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -548,8 +558,13 @@
     "buy": "mexc",
     "sell": "binance",
     "since": 1793471164529
+   },
+   "SOPH": {
+    "buy": "mexc",
+    "sell": "okx",
+    "since": 1793485506401
    }
   }
  },
- "lastRun": 1793471164529
+ "lastRun": 1793485506401
 }

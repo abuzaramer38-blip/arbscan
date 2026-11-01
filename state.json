@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 36,
+ "runs": 37,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 0.8533000000000001,
+  "earned": 0.92115,
   "costs": 0.11753397467992296,
   "pos": {
    "ex": "kucoin",
@@ -13,12 +13,12 @@
    "ivh": 4,
    "cost": 0.23506794935984593,
    "openedAt": 1792875733462,
-   "creditedTo": 1793491200000,
-   "earned": 0.8533000000000001,
-   "payments": 43,
+   "creditedTo": 1793520000000,
+   "earned": 0.92115,
+   "payments": 45,
    "scoreAtOpen": 0.5973
   },
-  "lastDecision": 1793471164529,
+  "lastDecision": 1793523970664,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 36.214000000000006,
+  "profit": 36.864000000000004,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -390,14 +390,24 @@
     "profit": 0.859,
     "gapPct": 1.846,
     "rebalanced": false
+   },
+   {
+    "t": "2026-11-01 09:06 UTC",
+    "coin": "POWR",
+    "buy": "gate",
+    "sell": "binance",
+    "size": 50,
+    "profit": 0.65,
+    "gapPct": 2.993,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 36,
-  "seen": 36,
+  "checks": 37,
+  "seen": 37,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -578,8 +588,13 @@
     "buy": "kucoin",
     "sell": "bybit",
     "since": 1793498683359
+   },
+   "POWR": {
+    "buy": "gate",
+    "sell": "binance",
+    "since": 1793523970664
    }
   }
  },
- "lastRun": 1793498683359
+ "lastRun": 1793523970664
 }

@@ -1,21 +1,20 @@
 # Paper bot report
 
-Running since **2026-10-24 21:02 UTC** (8.15 days, 40 hourly runs). Last run 2026-11-02 00:31 UTC. No real money.
+Running since **2026-10-24 21:02 UTC** (8.44 days, 41 hourly runs). Last run 2026-11-02 07:34 UTC. No real money.
 
 | Wallet | Start | Now (if closed now) | Profit |
 |---|---|---|---|
 | Funding (spot + short) | $100 | $100.71 | +$0.71 |
-| Instant buy & sell | $100 | $139.34 | +$39.34 |
+| Instant buy & sell | $100 | $140.15 | +$40.15 |
 
-**Funding wallet**: funding received $0.947, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (49 payments, $0.947).
+**Funding wallet**: funding received $0.950, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (50 payments, $0.950).
 
-**Instant wallet**: 40 trades in 40 checks; a profitable gap existed in 40 of 40 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, AO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO.
+**Instant wallet**: 41 trades in 41 checks; a profitable gap existed in 41 of 41 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, AO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO, ERA.
 
 ## Funding wallet actions (last 15)
 - 2026-10-24 21:02 UTC **BUY** JCT on kucoin — paid 0.597%/day last 24h, cost $0.235
 
 ## Instant trades (last 15)
-- 2026-10-29 21:43 UTC VET: buy binance, sell mexc, $50 → +$1.188
 - 2026-10-30 01:50 UTC NIGHT: buy htx, sell mexc, $50 → +$1.439
 - 2026-10-30 08:29 UTC GTC: buy kucoin, sell binance, $50 → +$1.457
 - 2026-10-30 15:48 UTC TRX: buy binance, sell htx, $50 → +$1.483
@@ -30,5 +29,6 @@ Running since **2026-10-24 21:02 UTC** (8.15 days, 40 hourly runs). Last run 202
 - 2026-11-01 15:57 UTC MAPO: buy kucoin, sell htx, $50 → +$0.583
 - 2026-11-01 20:25 UTC STABLE: buy htx, sell bitget, $50 → +$0.713
 - 2026-11-02 00:31 UTC MAPO: buy kucoin, sell htx, $50 → +$1.184
+- 2026-11-02 07:34 UTC ERA: buy mexc, sell kucoin, $50 → +$0.801
 
 No errors.

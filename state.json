@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 43,
+ "runs": 44,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 0.9958999999999999,
+  "earned": 1.0240999999999998,
   "costs": 0.11753397467992296,
   "pos": {
    "ex": "kucoin",
@@ -13,12 +13,12 @@
    "ivh": 4,
    "cost": 0.23506794935984593,
    "openedAt": 1792875733462,
-   "creditedTo": 1793664000000,
-   "earned": 0.9958999999999999,
-   "payments": 55,
+   "creditedTo": 1793692800000,
+   "earned": 1.0240999999999998,
+   "payments": 57,
    "scoreAtOpen": 0.5973
   },
-  "lastDecision": 1793643071161,
+  "lastDecision": 1793697903322,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 42.188,
+  "profit": 43.122,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -460,14 +460,24 @@
     "profit": 1.243,
     "gapPct": 2.54,
     "rebalanced": false
+   },
+   {
+    "t": "2026-11-03 09:25 UTC",
+    "coin": "CVXON",
+    "buy": "gate",
+    "sell": "mexc",
+    "size": 50,
+    "profit": 0.934,
+    "gapPct": 1.925,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 43,
-  "seen": 43,
+  "checks": 44,
+  "seen": 44,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -673,8 +683,13 @@
     "buy": "gate",
     "sell": "okx",
     "since": 1793669429212
+   },
+   "CVXON": {
+    "buy": "gate",
+    "sell": "mexc",
+    "since": 1793697903322
    }
   }
  },
- "lastRun": 1793669429212
+ "lastRun": 1793697903322
 }

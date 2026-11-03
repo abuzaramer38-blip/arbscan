@@ -1,21 +1,20 @@
 # Paper bot report
 
-Running since **2026-10-24 21:02 UTC** (9.19 days, 43 hourly runs). Last run 2026-11-03 01:30 UTC. No real money.
+Running since **2026-10-24 21:02 UTC** (9.52 days, 44 hourly runs). Last run 2026-11-03 09:25 UTC. No real money.
 
 | Wallet | Start | Now (if closed now) | Profit |
 |---|---|---|---|
-| Funding (spot + short) | $100 | $100.76 | +$0.76 |
-| Instant buy & sell | $100 | $142.19 | +$42.19 |
+| Funding (spot + short) | $100 | $100.79 | +$0.79 |
+| Instant buy & sell | $100 | $143.12 | +$43.12 |
 
-**Funding wallet**: funding received $0.996, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (55 payments, $0.996).
+**Funding wallet**: funding received $1.024, fees+spread paid $0.118, holding **JCT on kucoin** since 2026-10-24 21:02 UTC (57 payments, $1.024).
 
-**Instant wallet**: 43 trades in 43 checks; a profitable gap existed in 43 of 43 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, AO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO, ERA, LUNC, LSK.
+**Instant wallet**: 44 trades in 44 checks; a profitable gap existed in 44 of 44 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ZIL, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, AO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO, ERA, LUNC, LSK, CVXON.
 
 ## Funding wallet actions (last 15)
 - 2026-10-24 21:02 UTC **BUY** JCT on kucoin — paid 0.597%/day last 24h, cost $0.235
 
 ## Instant trades (last 15)
-- 2026-10-30 15:48 UTC TRX: buy binance, sell htx, $50 → +$1.483
 - 2026-10-30 20:39 UTC AI: buy okx, sell binance, $50 → +$1.48
 - 2026-10-31 00:39 UTC MBL: buy htx, sell binance, $10 → +$0.297
 - 2026-10-31 06:53 UTC 4: buy htx, sell mexc, $10 → +$0.238
@@ -30,5 +29,6 @@ Running since **2026-10-24 21:02 UTC** (9.19 days, 43 hourly runs). Last run 202
 - 2026-11-02 07:34 UTC ERA: buy mexc, sell kucoin, $50 → +$0.801
 - 2026-11-02 18:11 UTC LUNC: buy kucoin, sell bybit, $50 → +$0.8
 - 2026-11-03 01:30 UTC LSK: buy gate, sell okx, $50 → +$1.243
+- 2026-11-03 09:25 UTC CVXON: buy gate, sell mexc, $50 → +$0.934
 
 No errors.

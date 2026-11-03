@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 42,
+ "runs": 43,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 0.9741499999999998,
+  "earned": 0.9958999999999999,
   "costs": 0.11753397467992296,
   "pos": {
    "ex": "kucoin",
@@ -13,9 +13,9 @@
    "ivh": 4,
    "cost": 0.23506794935984593,
    "openedAt": 1792875733462,
-   "creditedTo": 1793635200000,
-   "earned": 0.9741499999999998,
-   "payments": 53,
+   "creditedTo": 1793664000000,
+   "earned": 0.9958999999999999,
+   "payments": 55,
    "scoreAtOpen": 0.5973
   },
   "lastDecision": 1793643071161,
@@ -30,7 +30,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 40.945,
+  "profit": 42.188,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -450,14 +450,24 @@
     "profit": 0.8,
     "gapPct": 1.626,
     "rebalanced": false
+   },
+   {
+    "t": "2026-11-03 01:30 UTC",
+    "coin": "LSK",
+    "buy": "gate",
+    "sell": "okx",
+    "size": 50,
+    "profit": 1.243,
+    "gapPct": 2.54,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 42,
-  "seen": 42,
+  "checks": 43,
+  "seen": 43,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -658,8 +668,13 @@
     "buy": "kucoin",
     "sell": "bybit",
     "since": 1793643071161
+   },
+   "LSK": {
+    "buy": "gate",
+    "sell": "okx",
+    "since": 1793669429212
    }
   }
  },
- "lastRun": 1793643071161
+ "lastRun": 1793669429212
 }

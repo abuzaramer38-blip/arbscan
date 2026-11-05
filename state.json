@@ -1,36 +1,50 @@
 {
  "started": 1792875733462,
- "runs": 49,
+ "runs": 50,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 1.07235,
-  "costs": 0.11753397467992296,
+  "earned": 1.0748499999999999,
+  "costs": 0.3436234371255661,
   "pos": {
    "ex": "kucoin",
-   "base": "JCT",
-   "sym": "JCTUSDTM",
+   "base": "EVAA",
+   "sym": "EVAAUSDTM",
    "ivh": 4,
-   "cost": 0.23506794935984593,
-   "openedAt": 1792875733462,
-   "creditedTo": 1793822400000,
-   "earned": 1.07235,
-   "payments": 66,
-   "scoreAtOpen": 0.5973
+   "cost": 0.21711097553144026,
+   "openedAt": 1793844776158,
+   "creditedTo": 1793844776158,
+   "earned": 0,
+   "payments": 0,
+   "scoreAtOpen": 0.3413
   },
-  "lastDecision": 1793801889624,
+  "lastDecision": 1793844776158,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
     "action": "BUY",
     "what": "JCT on kucoin",
     "why": "paid 0.597%/day last 24h, cost $0.235"
+   },
+   {
+    "t": "2026-11-05 02:12 UTC",
+    "action": "SELL",
+    "what": "JCT on kucoin",
+    "why": "better: EVAA on kucoin",
+    "earned": 1.0748,
+    "payments": 67
+   },
+   {
+    "t": "2026-11-05 02:12 UTC",
+    "action": "BUY",
+    "what": "EVAA on kucoin",
+    "why": "paid 0.341%/day last 24h, cost $0.217"
    }
   ]
  },
  "instant": {
   "capital": 100,
-  "profit": 47.155,
+  "profit": 47.792,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -510,14 +524,24 @@
     "profit": 0.856,
     "gapPct": 2.261,
     "rebalanced": false
+   },
+   {
+    "t": "2026-11-05 02:12 UTC",
+    "coin": "ELF",
+    "buy": "mexc",
+    "sell": "htx",
+    "size": 50,
+    "profit": 0.637,
+    "gapPct": 2.006,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 49,
-  "seen": 49,
+  "checks": 50,
+  "seen": 50,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -748,8 +772,13 @@
     "buy": "htx",
     "sell": "kucoin",
     "since": 1793826854461
+   },
+   "ELF": {
+    "buy": "mexc",
+    "sell": "htx",
+    "since": 1793844776158
    }
   }
  },
- "lastRun": 1793826854461
+ "lastRun": 1793844776158
 }

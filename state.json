@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 54,
+ "runs": 55,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 1.2634,
+  "earned": 1.2958,
   "costs": 0.3436234371255661,
   "pos": {
    "ex": "kucoin",
@@ -13,12 +13,12 @@
    "ivh": 4,
    "cost": 0.21711097553144026,
    "openedAt": 1793844776158,
-   "creditedTo": 1793937600000,
-   "earned": 0.18855000000000002,
-   "payments": 7,
+   "creditedTo": 1793966400000,
+   "earned": 0.22095000000000004,
+   "payments": 9,
    "scoreAtOpen": 0.3413
   },
-  "lastDecision": 1793923347091,
+  "lastDecision": 1793976973496,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -44,7 +44,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 52.445,
+  "profit": 53.274,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -574,14 +574,24 @@
     "profit": 0.931,
     "gapPct": 1.883,
     "rebalanced": false
+   },
+   {
+    "t": "2026-11-06 14:56 UTC",
+    "coin": "AERO",
+    "buy": "bitget",
+    "sell": "bybit",
+    "size": 50,
+    "profit": 0.829,
+    "gapPct": 1.681,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 54,
-  "seen": 54,
+  "checks": 55,
+  "seen": 55,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -837,8 +847,13 @@
     "buy": "bybit",
     "sell": "htx",
     "since": 1793946077911
+   },
+   "AERO": {
+    "buy": "bitget",
+    "sell": "bybit",
+    "since": 1793976973496
    }
   }
  },
- "lastRun": 1793946077911
+ "lastRun": 1793976973496
 }

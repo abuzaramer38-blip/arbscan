@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 53,
+ "runs": 54,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 1.24255,
+  "earned": 1.2634,
   "costs": 0.3436234371255661,
   "pos": {
    "ex": "kucoin",
@@ -13,9 +13,9 @@
    "ivh": 4,
    "cost": 0.21711097553144026,
    "openedAt": 1793844776158,
-   "creditedTo": 1793923200000,
-   "earned": 0.16770000000000002,
-   "payments": 6,
+   "creditedTo": 1793937600000,
+   "earned": 0.18855000000000002,
+   "payments": 7,
    "scoreAtOpen": 0.3413
   },
   "lastDecision": 1793923347091,
@@ -44,7 +44,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 51.514,
+  "profit": 52.445,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -564,14 +564,24 @@
     "profit": 1.085,
     "gapPct": 2.232,
     "rebalanced": false
+   },
+   {
+    "t": "2026-11-06 06:21 UTC",
+    "coin": "AR",
+    "buy": "bybit",
+    "sell": "htx",
+    "size": 50,
+    "profit": 0.931,
+    "gapPct": 1.883,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 53,
-  "seen": 53,
+  "checks": 54,
+  "seen": 54,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -822,8 +832,13 @@
     "buy": "binance",
     "sell": "gate",
     "since": 1793923347091
+   },
+   "AR": {
+    "buy": "bybit",
+    "sell": "htx",
+    "since": 1793946077911
    }
   }
  },
- "lastRun": 1793923347091
+ "lastRun": 1793946077911
 }

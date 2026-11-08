@@ -1,15 +1,15 @@
 # Paper bot report
 
-Running since **2026-10-24 21:02 UTC** (14.55 days, 63 hourly runs). Last run 2026-11-08 10:09 UTC. No real money.
+Running since **2026-10-24 21:02 UTC** (14.83 days, 64 hourly runs). Last run 2026-11-08 16:59 UTC. No real money.
 
 | Wallet | Start | Now (if closed now) | Profit |
 |---|---|---|---|
-| Funding (spot + short) | $100 | $101.07 | +$1.07 |
+| Funding (spot + short) | $100 | $101.13 | +$1.13 |
 | Instant buy & sell | $100 | $161.73 | +$61.73 |
 
-**Funding wallet**: funding received $1.525, fees+spread paid $0.344, holding **EVAA on kucoin** since 2026-11-05 02:12 UTC (20 payments, $0.450).
+**Funding wallet**: funding received $1.578, fees+spread paid $0.344, holding **EVAA on kucoin** since 2026-11-05 02:12 UTC (22 payments, $0.503).
 
-**Instant wallet**: 62 trades in 63 checks; a profitable gap existed in 63 of 63 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, AO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO, ERA, LUNC, LSK, CVXON, EPIC, HOT, ALPINE, BRISE, ELF, THE, KOR, AUDIO, AR, AERO, SIREN, ARIA, CORE, DCR, DGB, ZEC, SIGN.
+**Instant wallet**: 62 trades in 64 checks; a profitable gap existed in 64 of 64 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, AO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO, ERA, LUNC, LSK, CVXON, EPIC, HOT, ALPINE, BRISE, ELF, THE, KOR, AUDIO, AR, AERO, SIREN, ARIA, CORE, DCR, DGB, ZEC, SIGN.
 
 ## Funding wallet actions (last 15)
 - 2026-10-24 21:02 UTC **BUY** JCT on kucoin — paid 0.597%/day last 24h, cost $0.235

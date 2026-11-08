@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 64,
+ "runs": 65,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 1.5782500000000004,
+  "earned": 1.6037500000000005,
   "costs": 0.3436234371255661,
   "pos": {
    "ex": "kucoin",
@@ -13,12 +13,12 @@
    "ivh": 4,
    "cost": 0.21711097553144026,
    "openedAt": 1793844776158,
-   "creditedTo": 1794153600000,
-   "earned": 0.5034,
-   "payments": 22,
+   "creditedTo": 1794168000000,
+   "earned": 0.5288999999999999,
+   "payments": 23,
    "scoreAtOpen": 0.3413
   },
-  "lastDecision": 1794132568421,
+  "lastDecision": 1794171729854,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -44,7 +44,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 61.732000000000006,
+  "profit": 61.791000000000004,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -664,14 +664,24 @@
     "profit": 1.379,
     "gapPct": 2.741,
     "rebalanced": false
+   },
+   {
+    "t": "2026-11-08 21:02 UTC",
+    "coin": "WAXL",
+    "buy": "htx",
+    "sell": "mexc",
+    "size": 5,
+    "profit": 0.059,
+    "gapPct": 2.153,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 64,
-  "seen": 64,
+  "checks": 65,
+  "seen": 65,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -962,8 +972,13 @@
     "buy": "binance",
     "sell": "bitget",
     "since": 1794132568421
+   },
+   "WAXL": {
+    "buy": "htx",
+    "sell": "mexc",
+    "since": 1794171729854
    }
   }
  },
- "lastRun": 1794157163336
+ "lastRun": 1794171729854
 }

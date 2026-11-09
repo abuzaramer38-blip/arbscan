@@ -1,15 +1,15 @@
 # Paper bot report
 
-Running since **2026-10-24 21:02 UTC** (15.00 days, 65 hourly runs). Last run 2026-11-08 21:02 UTC. No real money.
+Running since **2026-10-24 21:02 UTC** (15.15 days, 66 hourly runs). Last run 2026-11-09 00:43 UTC. No real money.
 
 | Wallet | Start | Now (if closed now) | Profit |
 |---|---|---|---|
-| Funding (spot + short) | $100 | $101.15 | +$1.15 |
-| Instant buy & sell | $100 | $161.79 | +$61.79 |
+| Funding (spot + short) | $100 | $101.20 | +$1.20 |
+| Instant buy & sell | $100 | $162.97 | +$62.97 |
 
-**Funding wallet**: funding received $1.604, fees+spread paid $0.344, holding **EVAA on kucoin** since 2026-11-05 02:12 UTC (23 payments, $0.529).
+**Funding wallet**: funding received $1.649, fees+spread paid $0.344, holding **EVAA on kucoin** since 2026-11-05 02:12 UTC (24 payments, $0.574).
 
-**Instant wallet**: 63 trades in 65 checks; a profitable gap existed in 65 of 65 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, AO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO, ERA, LUNC, LSK, CVXON, EPIC, HOT, ALPINE, BRISE, ELF, THE, KOR, AUDIO, AR, AERO, SIREN, ARIA, CORE, DCR, DGB, ZEC, SIGN, WAXL.
+**Instant wallet**: 64 trades in 66 checks; a profitable gap existed in 66 of 66 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ASSET, UPC, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, AO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO, ERA, LUNC, LSK, CVXON, EPIC, HOT, ALPINE, BRISE, ELF, THE, KOR, AUDIO, AR, AERO, SIREN, ARIA, CORE, DCR, DGB, ZEC, SIGN, WAXL, GT.
 
 ## Funding wallet actions (last 15)
 - 2026-10-24 21:02 UTC **BUY** JCT on kucoin — paid 0.597%/day last 24h, cost $0.235
@@ -17,7 +17,6 @@ Running since **2026-10-24 21:02 UTC** (15.00 days, 65 hourly runs). Last run 20
 - 2026-11-05 02:12 UTC **BUY** EVAA on kucoin — paid 0.341%/day last 24h, cost $0.217
 
 ## Instant trades (last 15)
-- 2026-11-05 02:12 UTC ELF: buy mexc, sell htx, $50 → +$0.637
 - 2026-11-05 10:41 UTC THE: buy binance, sell gate, $50 → +$1.228
 - 2026-11-05 18:39 UTC KOR: buy bitget, sell kucoin, $50 → +$1.409
 - 2026-11-06 00:02 UTC AUDIO: buy binance, sell gate, $50 → +$1.085
@@ -32,5 +31,6 @@ Running since **2026-10-24 21:02 UTC** (15.00 days, 65 hourly runs). Last run 20
 - 2026-11-08 02:17 UTC ZEC: buy mexc, sell bitget, $50 → +$0.874
 - 2026-11-08 10:09 UTC SIGN: buy binance, sell bitget, $50 → +$1.379
 - 2026-11-08 21:02 UTC WAXL: buy htx, sell mexc, $5 → +$0.059
+- 2026-11-09 00:43 UTC GT: buy htx, sell gate, $50 → +$1.181
 
 No errors.

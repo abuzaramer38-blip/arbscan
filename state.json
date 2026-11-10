@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 69,
+ "runs": 70,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 1.8494500000000003,
+  "earned": 1.8855500000000003,
   "costs": 0.3436234371255661,
   "pos": {
    "ex": "kucoin",
@@ -13,12 +13,12 @@
    "ivh": 4,
    "cost": 0.21711097553144026,
    "openedAt": 1793844776158,
-   "creditedTo": 1794268800000,
-   "earned": 0.7746,
-   "payments": 30,
+   "creditedTo": 1794297600000,
+   "earned": 0.8107,
+   "payments": 32,
    "scoreAtOpen": 0.3413
   },
-  "lastDecision": 1794249608760,
+  "lastDecision": 1794303463678,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -44,7 +44,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 65.683,
+  "profit": 66.233,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -714,14 +714,24 @@
     "profit": 0.239,
     "gapPct": 2.221,
     "rebalanced": true
+   },
+   {
+    "t": "2026-11-10 09:37 UTC",
+    "coin": "MANYU",
+    "buy": "mexc",
+    "sell": "htx",
+    "size": 30,
+    "profit": 0.55,
+    "gapPct": 2.574,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 69,
-  "seen": 69,
+  "checks": 70,
+  "seen": 70,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -1027,8 +1037,13 @@
     "buy": "htx",
     "sell": "gate",
     "since": 1794249608760
+   },
+   "MANYU": {
+    "buy": "mexc",
+    "sell": "htx",
+    "since": 1794303463678
    }
   }
  },
- "lastRun": 1794275874810
+ "lastRun": 1794303463678
 }

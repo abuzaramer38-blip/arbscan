@@ -1,24 +1,24 @@
 {
  "started": 1792875733462,
- "runs": 76,
+ "runs": 77,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 2.0970500000000003,
-  "costs": 0.3436234371255661,
+  "earned": 2.1021000000000005,
+  "costs": 0.5577919592474384,
   "pos": {
-   "ex": "kucoin",
-   "base": "EVAA",
-   "sym": "EVAAUSDTM",
+   "ex": "bitget",
+   "base": "ARIA",
+   "sym": "ARIAUSDT",
    "ivh": 4,
-   "cost": 0.21711097553144026,
-   "openedAt": 1793844776158,
-   "creditedTo": 1794441600000,
-   "earned": 1.0222,
-   "payments": 42,
-   "scoreAtOpen": 0.3413
+   "cost": 0.21122606871230443,
+   "openedAt": 1794480807184,
+   "creditedTo": 1794480807184,
+   "earned": 0,
+   "payments": 0,
+   "scoreAtOpen": 0.3594
   },
-  "lastDecision": 1794451771067,
+  "lastDecision": 1794480807184,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -39,12 +39,26 @@
     "action": "BUY",
     "what": "EVAA on kucoin",
     "why": "paid 0.341%/day last 24h, cost $0.217"
+   },
+   {
+    "t": "2026-11-12 10:53 UTC",
+    "action": "SELL",
+    "what": "EVAA on kucoin",
+    "why": "better: ARIA on bitget",
+    "earned": 1.0272,
+    "payments": 44
+   },
+   {
+    "t": "2026-11-12 10:53 UTC",
+    "action": "BUY",
+    "what": "ARIA on bitget",
+    "why": "paid 0.359%/day last 24h, cost $0.211"
    }
   ]
  },
  "instant": {
   "capital": 100,
-  "profit": 72.408,
+  "profit": 73.674,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -784,14 +798,24 @@
     "profit": 0.252,
     "gapPct": 1.783,
     "rebalanced": false
+   },
+   {
+    "t": "2026-11-12 10:53 UTC",
+    "coin": "XMR",
+    "buy": "mexc",
+    "sell": "kucoin",
+    "size": 50,
+    "profit": 1.266,
+    "gapPct": 2.69,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 76,
-  "seen": 76,
+  "checks": 77,
+  "seen": 77,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -1132,8 +1156,13 @@
     "buy": "kucoin",
     "sell": "mexc",
     "since": 1794451771067
+   },
+   "XMR": {
+    "buy": "mexc",
+    "sell": "kucoin",
+    "since": 1794480807184
    }
   }
  },
- "lastRun": 1794451771067
+ "lastRun": 1794480807184
 }

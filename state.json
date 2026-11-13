@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 78,
+ "runs": 79,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 2.1532500000000003,
+  "earned": 2.2229500000000004,
   "costs": 0.5577919592474384,
   "pos": {
    "ex": "bitget",
@@ -13,12 +13,12 @@
    "ivh": 4,
    "cost": 0.21122606871230443,
    "openedAt": 1794480807184,
-   "creditedTo": 1794499200000,
-   "earned": 0.05115,
-   "payments": 2,
+   "creditedTo": 1794528000000,
+   "earned": 0.12085,
+   "payments": 4,
    "scoreAtOpen": 0.3594
   },
-  "lastDecision": 1794480807184,
+  "lastDecision": 1794528362439,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -58,7 +58,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 74.477,
+  "profit": 75.153,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -818,14 +818,24 @@
     "profit": 0.803,
     "gapPct": 2.119,
     "rebalanced": false
+   },
+   {
+    "t": "2026-11-13 00:06 UTC",
+    "coin": "BLUAI",
+    "buy": "htx",
+    "sell": "gate",
+    "size": 50,
+    "profit": 0.676,
+    "gapPct": 2.657,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 78,
-  "seen": 78,
+  "checks": 79,
+  "seen": 79,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -1176,8 +1186,13 @@
     "buy": "gate",
     "sell": "htx",
     "since": 1794509283595
+   },
+   "BLUAI": {
+    "buy": "htx",
+    "sell": "gate",
+    "since": 1794528362439
    }
   }
  },
- "lastRun": 1794509283595
+ "lastRun": 1794528362439
 }

@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 79,
+ "runs": 80,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 2.2229500000000004,
+  "earned": 2.2511500000000004,
   "costs": 0.5577919592474384,
   "pos": {
    "ex": "bitget",
@@ -13,9 +13,9 @@
    "ivh": 4,
    "cost": 0.21122606871230443,
    "openedAt": 1794480807184,
-   "creditedTo": 1794528000000,
-   "earned": 0.12085,
-   "payments": 4,
+   "creditedTo": 1794542400000,
+   "earned": 0.14905000000000002,
+   "payments": 5,
    "scoreAtOpen": 0.3594
   },
   "lastDecision": 1794528362439,
@@ -58,7 +58,7 @@
  },
  "instant": {
   "capital": 100,
-  "profit": 75.153,
+  "profit": 76.456,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -828,14 +828,24 @@
     "profit": 0.676,
     "gapPct": 2.657,
     "rebalanced": false
+   },
+   {
+    "t": "2026-11-13 06:28 UTC",
+    "coin": "DOGS",
+    "buy": "mexc",
+    "sell": "okx",
+    "size": 50,
+    "profit": 1.303,
+    "gapPct": 2.786,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 79,
-  "seen": 79,
+  "checks": 80,
+  "seen": 80,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -1191,8 +1201,13 @@
     "buy": "htx",
     "sell": "gate",
     "since": 1794528362439
+   },
+   "DOGS": {
+    "buy": "mexc",
+    "sell": "okx",
+    "since": 1794551338839
    }
   }
  },
- "lastRun": 1794528362439
+ "lastRun": 1794551338839
 }

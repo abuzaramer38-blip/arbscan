@@ -1,15 +1,15 @@
 # Paper bot report
 
-Running since **2026-10-24 21:02 UTC** (20.54 days, 84 hourly runs). Last run 2026-11-14 10:04 UTC. No real money.
+Running since **2026-10-24 21:02 UTC** (20.81 days, 85 hourly runs). Last run 2026-11-14 16:31 UTC. No real money.
 
 | Wallet | Start | Now (if closed now) | Profit |
 |---|---|---|---|
-| Funding (spot + short) | $100 | $101.68 | +$1.68 |
-| Instant buy & sell | $100 | $179.59 | +$79.59 |
+| Funding (spot + short) | $100 | $101.69 | +$1.69 |
+| Instant buy & sell | $100 | $180.46 | +$80.46 |
 
-**Funding wallet**: funding received $2.348, fees+spread paid $0.558, holding **ARIA on bitget** since 2026-11-12 10:53 UTC (12 payments, $0.246).
+**Funding wallet**: funding received $2.353, fees+spread paid $0.558, holding **ARIA on bitget** since 2026-11-12 10:53 UTC (14 payments, $0.251).
 
-**Instant wallet**: 81 trades in 84 checks; a profitable gap existed in 84 of 84 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ASSET, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO, ERA, LUNC, LSK, CVXON, EPIC, HOT, ALPINE, BRISE, ELF, THE, KOR, AUDIO, AR, AERO, SIREN, ARIA, CORE, DCR, DGB, ZEC, SIGN, WAXL, GT, GLMR, CSPR, MANYU, WAVES, CC, ONE, XVG, MERL, AZERO, XMR, SPCX, BLUAI, DOGS, BDX, BTW.
+**Instant wallet**: 82 trades in 85 checks; a profitable gap existed in 85 of 85 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ASSET, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO, ERA, LUNC, LSK, CVXON, EPIC, HOT, ALPINE, BRISE, ELF, THE, KOR, AUDIO, AR, AERO, SIREN, ARIA, CORE, DCR, DGB, ZEC, SIGN, WAXL, GT, GLMR, CSPR, MANYU, WAVES, CC, ONE, XVG, MERL, AZERO, XMR, SPCX, BLUAI, DOGS, BDX, BTW, KONET.
 
 ## Funding wallet actions (last 15)
 - 2026-10-24 21:02 UTC **BUY** JCT on kucoin — paid 0.597%/day last 24h, cost $0.235
@@ -19,7 +19,6 @@ Running since **2026-10-24 21:02 UTC** (20.54 days, 84 hourly runs). Last run 20
 - 2026-11-12 10:53 UTC **BUY** ARIA on bitget — paid 0.359%/day last 24h, cost $0.211
 
 ## Instant trades (last 15)
-- 2026-11-10 01:57 UTC AO: buy mexc, sell gate, $20 → +$0.239
 - 2026-11-10 09:37 UTC MANYU: buy mexc, sell htx, $30 → +$0.55
 - 2026-11-10 17:39 UTC WAVES: buy bybit, sell kucoin, $50 → +$1.47
 - 2026-11-10 23:08 UTC CC: buy mexc, sell bybit, $50 → +$1.448
@@ -34,5 +33,6 @@ Running since **2026-10-24 21:02 UTC** (20.54 days, 84 hourly runs). Last run 20
 - 2026-11-13 15:16 UTC BDX: buy kucoin, sell mexc, $50 → +$1.26
 - 2026-11-14 02:12 UTC UPC: buy bitget, sell mexc, $50 → +$0.519
 - 2026-11-14 10:04 UTC BTW: buy bitget, sell gate, $50 → +$1.353
+- 2026-11-14 16:31 UTC KONET: buy kucoin, sell gate, $50 → +$0.87
 
 No errors.

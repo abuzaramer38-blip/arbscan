@@ -1,15 +1,15 @@
 # Paper bot report
 
-Running since **2026-10-24 21:02 UTC** (21.83 days, 89 hourly runs). Last run 2026-11-15 16:56 UTC. No real money.
+Running since **2026-10-24 21:02 UTC** (22.03 days, 90 hourly runs). Last run 2026-11-15 21:39 UTC. No real money.
 
 | Wallet | Start | Now (if closed now) | Profit |
 |---|---|---|---|
-| Funding (spot + short) | $100 | $101.79 | +$1.79 |
+| Funding (spot + short) | $100 | $101.91 | +$1.91 |
 | Instant buy & sell | $100 | $184.18 | +$84.18 |
 
-**Funding wallet**: funding received $2.760, fees+spread paid $0.817, holding **EVAA on kucoin** since 2026-11-15 01:43 UTC (4 payments, $0.401).
+**Funding wallet**: funding received $2.882, fees+spread paid $0.817, holding **EVAA on kucoin** since 2026-11-15 01:43 UTC (5 payments, $0.523).
 
-**Instant wallet**: 85 trades in 89 checks; a profitable gap existed in 89 of 89 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ASSET, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO, ERA, LUNC, LSK, CVXON, EPIC, HOT, ALPINE, BRISE, ELF, THE, KOR, AUDIO, AR, AERO, SIREN, ARIA, CORE, DCR, DGB, ZEC, SIGN, WAXL, GT, GLMR, CSPR, MANYU, WAVES, CC, ONE, XVG, MERL, AZERO, XMR, SPCX, BLUAI, DOGS, BDX, BTW, KONET, BSV, PENDLE, GMT.
+**Instant wallet**: 85 trades in 90 checks; a profitable gap existed in 90 of 90 checks. Assumes the coin was already sitting on the selling exchange; a coin can't be traded the same way again until the reverse trade brings it back. Stuck now: 4, ANIME, WAXP, QUBIC, IOST, XEC, ASSET, MTL, TORN, ACN, VERONA, NES, PUFFER, IEFAON, DIAM, ACNON, JPMON, OSMO, NIL, ETN, INIT, WARD, VET, NIGHT, GTC, TRX, AI, MBL, OP, STX, SOPH, BMT, POWR, STABLE, MAPO, ERA, LUNC, LSK, CVXON, EPIC, HOT, ALPINE, BRISE, ELF, THE, KOR, AUDIO, AR, AERO, SIREN, ARIA, CORE, DCR, DGB, ZEC, SIGN, WAXL, GT, GLMR, CSPR, MANYU, WAVES, CC, ONE, XVG, MERL, AZERO, XMR, SPCX, BLUAI, DOGS, BDX, BTW, KONET, BSV, PENDLE, GMT.
 
 ## Funding wallet actions (last 15)
 - 2026-10-24 21:02 UTC **BUY** JCT on kucoin — paid 0.597%/day last 24h, cost $0.235

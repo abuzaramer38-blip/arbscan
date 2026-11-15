@@ -1,24 +1,24 @@
 {
  "started": 1792875733462,
- "runs": 86,
+ "runs": 87,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 2.3559,
-  "costs": 0.5577919592474384,
+  "earned": 2.3584,
+  "costs": 0.8173922621221104,
   "pos": {
-   "ex": "bitget",
-   "base": "ARIA",
-   "sym": "ARIAUSDT",
+   "ex": "kucoin",
+   "base": "EVAA",
+   "sym": "EVAAUSDTM",
    "ivh": 4,
-   "cost": 0.21122606871230443,
-   "openedAt": 1794480807184,
-   "creditedTo": 1794686400000,
-   "earned": 0.2538,
-   "payments": 15,
-   "scoreAtOpen": 0.3594
+   "cost": 0.3079745370370396,
+   "openedAt": 1794707037562,
+   "creditedTo": 1794707037562,
+   "earned": 0,
+   "payments": 0,
+   "scoreAtOpen": 0.32
   },
-  "lastDecision": 1794673914596,
+  "lastDecision": 1794707037562,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -53,12 +53,26 @@
     "action": "BUY",
     "what": "ARIA on bitget",
     "why": "paid 0.359%/day last 24h, cost $0.211"
+   },
+   {
+    "t": "2026-11-15 01:43 UTC",
+    "action": "SELL",
+    "what": "ARIA on bitget",
+    "why": "better: EVAA on kucoin",
+    "earned": 0.2563,
+    "payments": 16
+   },
+   {
+    "t": "2026-11-15 01:43 UTC",
+    "action": "BUY",
+    "what": "EVAA on kucoin",
+    "why": "paid 0.320%/day last 24h, cost $0.308"
    }
   ]
  },
  "instant": {
   "capital": 100,
-  "profit": 82.00900000000001,
+  "profit": 83.30400000000002,
   "trades": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -888,14 +902,24 @@
     "profit": 1.551,
     "gapPct": 2.956,
     "rebalanced": false
+   },
+   {
+    "t": "2026-11-15 01:43 UTC",
+    "coin": "PENDLE",
+    "buy": "gate",
+    "sell": "htx",
+    "size": 50,
+    "profit": 1.295,
+    "gapPct": 2.747,
+    "rebalanced": false
    }
   ],
   "taken": {
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 86,
-  "seen": 86,
+  "checks": 87,
+  "seen": 87,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -1271,8 +1295,13 @@
     "buy": "gate",
     "sell": "htx",
     "since": 1794691077743
+   },
+   "PENDLE": {
+    "buy": "gate",
+    "sell": "htx",
+    "since": 1794707037562
    }
   }
  },
- "lastRun": 1794691077743
+ "lastRun": 1794707037562
 }

@@ -1,10 +1,10 @@
 {
  "started": 1792875733462,
- "runs": 90,
+ "runs": 91,
  "errors": [],
  "funding": {
   "capital": 100,
-  "earned": 2.8818000000000006,
+  "earned": 2.9922500000000007,
   "costs": 0.8173922621221104,
   "pos": {
    "ex": "kucoin",
@@ -13,12 +13,12 @@
    "ivh": 4,
    "cost": 0.3079745370370396,
    "openedAt": 1794707037562,
-   "creditedTo": 1794772800000,
-   "earned": 0.5234000000000001,
-   "payments": 5,
+   "creditedTo": 1794787200000,
+   "earned": 0.6338500000000001,
+   "payments": 6,
    "scoreAtOpen": 0.32
   },
-  "lastDecision": 1794761806051,
+  "lastDecision": 1794793774733,
   "log": [
    {
     "t": "2026-10-24 21:02 UTC",
@@ -928,8 +928,8 @@
    "ANIME|okx|mexc": 1792875733462,
    "coin|ANIME": 1792875733462
   },
-  "checks": 90,
-  "seen": 90,
+  "checks": 91,
+  "seen": 91,
   "stuck": {
    "4": {
     "buy": "htx",
@@ -1318,5 +1318,5 @@
    }
   }
  },
- "lastRun": 1794778759228
+ "lastRun": 1794793774733
 }
